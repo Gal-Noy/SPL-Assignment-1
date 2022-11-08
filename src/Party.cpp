@@ -5,6 +5,8 @@ Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName
     // You can change the implementation of the constructor, but not the signature!
 }
 
+Party::Party(){}
+
 State Party::getState() const
 {
     return mState;
@@ -23,6 +25,23 @@ int Party::getMandates() const
 const string & Party::getName() const
 {
     return mName;
+}
+
+int Party::getId() const
+{
+    return mId;
+}
+
+int Party::getCooldown() const
+{
+    return cooldown;
+}
+
+void Party::changeCooldown(){
+    if (cooldown < 0)
+        cooldown = 3;
+    else if (cooldown > 0)
+        cooldown--;
 }
 
 void Party::step(Simulation &s)

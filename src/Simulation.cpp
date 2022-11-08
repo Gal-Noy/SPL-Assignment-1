@@ -1,4 +1,5 @@
 #include "Simulation.h"
+#include "Agent.h"
 
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents) 
 {
@@ -8,10 +9,15 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgen
 void Simulation::step()
 {
     // TODO: implement this method
+    vector<Agent> zibi = this->getAgents();
+    zibi[0].step(*this);
+    zibi[1].step(*this);
 }
 
 bool Simulation::shouldTerminate() const
 {
+    // should terminate when any coalition reaches 61 mandates or all parties are in state joined
+
     // TODO implement this method
     return true;
 }
