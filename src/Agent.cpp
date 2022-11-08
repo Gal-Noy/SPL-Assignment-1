@@ -5,7 +5,7 @@
 
 Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy)
 {
-    // You can change the implementation of the constructor, but not the signature!
+    coalition = getId();
 
 }
 
@@ -17,6 +17,16 @@ int Agent::getId() const
 int Agent::getPartyId() const
 {
     return mPartyId;
+}
+
+int Agent::getCoalition() const
+{
+    return coalition;
+}
+
+void Agent::setCoalition(int col)
+{
+    coalition = col;
 }
 
 void Agent::step(Simulation &sim)

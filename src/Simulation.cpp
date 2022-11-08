@@ -1,5 +1,6 @@
 #include "Simulation.h"
 #include "Agent.h"
+#include <map>
 
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents) 
 {
@@ -41,6 +42,16 @@ const Party &Simulation::getParty(int partyId) const
 /// At the simulation initialization - the result will be [[agent0.partyId], [agent1.partyId], ...]
 const vector<vector<int>> Simulation::getPartiesByCoalitions() const
 {
-    // TODO: you MUST implement this method for getting proper output, read the documentation above.
-    return vector<vector<int>>();
+    std::map<int, vector<int>> map;
+    for (Agent agent : getAgents()){
+        if (map.find(agent.getCoalition()) == map.end())
+            map[agent.getCoalition()] = vector<int>();
+        map[agent.getCoalition()].push_back(agent.getPartyId());
+    }
+    vector<vector<int>> ans;
+    for (auto coalitionVector : map)
+        ans.push_back(coalitionVector.second);
+    return ans;
 }
+
+
