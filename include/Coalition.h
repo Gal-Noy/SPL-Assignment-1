@@ -1,25 +1,25 @@
 #pragma once
 #include "Party.h"
 #include "Agent.h"
-#include <vector>
+#include <set>
 
-using std::vector;
+using std::set;
 
 class Coalition
 {
 public:
-    Coalition(vector<Agent> agent, vector<Party> existingParties, int mandates);
-    vector<Agent> getAgents();
-    void cloneAgent(Agent agent, Party party);
+    Coalition(Agent &agent, set<Party&> existingParties, int mandates);
+    const Agent& getAgent() const;
     int getMandates() const;
     void addMandates(int toAdd);
-    vector<Party> getParties();
-    void addParty(Party party); //adds party to existing and removes from available
-    vector<Party> getAvailableParties();
-    void addAvailableParty(Party party);
+    set<Party&> getParties() const;
+    void addParty(Party &party); //adds party to existing and removes from available
+    set<Party&> getAvailableParties() const;
+    void addAvailableParty(Party &party);
 
 private:
-    vector<Agent> agents;
-    vector<Party> existingParties, availableParties;
+    Agent &mAgent;
+    set<Party&> existingParties;
+    set<Party&> availableParties;
     int mandates;
 };

@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "Coalition.h"
 
 using std::string;
 
@@ -18,7 +19,6 @@ class Party
 {
 public:
     Party(int id, string name, int mandates, JoinPolicy *);
-    Party();
 
     State getState() const;
     void setState(State state);
@@ -28,6 +28,7 @@ public:
     void changeCooldown();
     void step(Simulation &s);
     const string &getName() const;
+    void addOffer(Coalition &coalition);
 
 private:
     int mId;
@@ -35,6 +36,6 @@ private:
     int mMandates;
     JoinPolicy *mJoinPolicy;
     State mState;
-    int cooldown = -1;
-    vector<Agent> offers;
+    int cooldown;
+    vector<Coalition&> offers;
 };
