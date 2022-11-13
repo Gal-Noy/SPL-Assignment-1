@@ -4,6 +4,7 @@
 #include "Coalition.h"
 
 using std::string;
+using std::vector;
 
 class JoinPolicy;
 class Simulation;

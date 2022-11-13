@@ -1,10 +1,30 @@
-#include "Party.h"
 #include "Agent.h"
+#include "Party.h"
 #include <set>
 
 Coalition::Coalition(Agent &agent, set<Party&> _existingParties, int _mandates) : mAgent(agent), existingParties(_existingParties), availableParties(set<Party&>{}), mandates(_mandates)
 {
 
+}
+
+Coalition::~Coalition(){
+    // should Implement
+}
+
+Coalition::Coalition(const Coalition &other) : mAgent(other.mAgent), existingParties(other.existingParties), availableParties(other.availableParties){
+    
+}
+
+Coalition& Coalition::operator=(const Coalition &other){
+
+}
+
+Coalition& Coalition::operator=(const Coalition &&other){
+
+}
+
+bool operator > (const Coalition& c1, const Coalition& c2){
+    return c1.getMandates() > c2.getMandates();
 }
 
 const Agent& Coalition::getAgent() const

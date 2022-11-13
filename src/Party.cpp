@@ -56,14 +56,13 @@ void Party::step(Simulation &s)
         changeCooldown();
         return;
     }
-    mJoinPolicy->join();
-    setState(Joined);
+    mJoinPolicy->join(offers, s.getGraph());
+    
 
     // TODO
-    // check if status is collectionOffers
-    // update timer
-    // join to coalition according to policy & clone agent & add neighbors to availableParties
-    // update status
+    // join to chosen coalition according to policy & clone agent to agents vector & add neighbors to availableParties
+
+    setState(Joined);
 }
 
 void Party::addOffer(Coalition &coalition)

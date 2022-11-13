@@ -4,9 +4,15 @@
 
 class JoinPolicy {
     public:
-        virtual Party select(const Graph &, vector<Party>, int)=0;
+        virtual Coalition& join(vector<Coalition&> offers)=0;
 };
 
-class MandatesJoinPolicy : public JoinPolicy {};
+class MandatesJoinPolicy : public JoinPolicy {
+    public:
+        virtual Coalition& join(vector<Coalition&> offers);
+};
 
-class LastOfferJoinPolicy : public JoinPolicy {};
+class LastOfferJoinPolicy : public JoinPolicy {
+    public:
+        virtual Coalition& join(vector<Coalition&> offers);
+};

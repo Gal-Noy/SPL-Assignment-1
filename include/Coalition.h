@@ -9,6 +9,12 @@ class Coalition
 {
 public:
     Coalition(Agent &agent, set<Party&> existingParties, int mandates);
+    virtual ~Coalition();
+    Coalition(const Coalition &other);
+    Coalition& operator=(const Coalition &other);
+    Coalition& operator=(const Coalition &&other);
+    friend bool operator > (const Coalition& c1, const Coalition& c2);
+
     const Agent& getAgent() const;
     int getMandates() const;
     void addMandates(int toAdd);
