@@ -5,7 +5,7 @@
 
 Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy)
 {
-    coalition = getId();
+    ///////////////
 
 }
 
@@ -19,19 +19,13 @@ int Agent::getPartyId() const
     return mPartyId;
 }
 
-int Agent::getCoalition() const
-{
-    return coalition;
-}
-
-void Agent::setCoalition(int col)
-{
-    coalition = col;
-}
-
 void Agent::step(Simulation &sim)
 {
     // TODO: implement this method
+    // get availableParties
+    // select party from availableParties according to policy
+    // remove party from availableParties
+    // add Offer to party
 
     const Graph &graph = sim.getGraph();
     vector<Party> possibleParties;

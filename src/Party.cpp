@@ -46,5 +46,9 @@ void Party::changeCooldown(){
 
 void Party::step(Simulation &s)
 {
-    // TODO: implement this method
+    // TODO
+    // check if status is collectionOffers
+    // update timer
+    // join to coalition according to policy & clone agent & add neighbors to availableParties
+    // update status
 }
