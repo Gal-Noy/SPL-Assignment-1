@@ -3,7 +3,7 @@
 #include "Graph.h"
 #include <map>
 
-Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents) 
+Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents)
 {
     // 1. init coalitions:
     // 1.1. for every agent form a coalition (mandates & availableParties)
@@ -14,16 +14,16 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgen
 void Simulation::step()
 {
     const Graph &graph = getGraph();
+    // 1. parties-step: parties that can answer offers, answer
     for (int i = 0; i < graph.getNumVertices(); i++){
         Party party = graph.getParty(i);
         party.step(*this);
     }
 
+    // 2. agents-step: select party to offer and offer
     for (Agent agent : mAgents){
         agent.step(*this);
     }
-    // 1. parties-step: parties that can answer offers, answer 
-    // 2. agents-step: select party to offer and offer
 }
 
 bool Simulation::shouldTerminate() const
