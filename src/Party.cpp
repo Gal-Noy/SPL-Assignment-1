@@ -1,13 +1,13 @@
 #include "Party.h"
 #include "Coalition.h"
 #include <vector>
+//#include "Coalition.h"
 
 using std::vector;
 
-Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(name), mMandates(mandates), mJoinPolicy(jp), mState(Waiting) 
+Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(name), mMandates(mandates), mJoinPolicy(jp), mState(Waiting), cooldown(-1), offers(vector<Coalition*>{})
 {
-    cooldown = -1;
-    offers = vector<Coalition&>{};
+    // TODO: Implement constructor
 }
 
 State Party::getState() const
@@ -49,23 +49,22 @@ void Party::changeCooldown(){
 
 void Party::step(Simulation &s)
 {
-    if (!getState() == CollectingOffers){
+    if (!(getState() == CollectingOffers)){
         return;
     }
     if (cooldown > 0){
         changeCooldown();
         return;
     }
-    mJoinPolicy->join(offers, s.getGraph());
-    
+//    mJoinPolicy->join(offers, s.getGraph());
 
-    // TODO
-    // join to chosen coalition according to policy & clone agent to agents vector & add neighbors to availableParties
+
+    // TODO: join to chosen coalition according to policy & clone agent to agents vector & add neighbors to availableParties
 
     setState(Joined);
 }
 
-void Party::addOffer(Coalition &coalition)
+void Party::addOffer(Coalition *coalition)
 {
     offers.push_back(coalition);
 }

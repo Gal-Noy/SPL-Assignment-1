@@ -1,13 +1,13 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "Coalition.h"
 
 using std::string;
 using std::vector;
 
 class JoinPolicy;
 class Simulation;
+class Coalition;
 
 enum State
 {
@@ -24,12 +24,13 @@ public:
     State getState() const;
     void setState(State state);
     int getMandates() const;
+    void step(Simulation &s);
+    const string &getName() const;
+
     int getId() const;
     int getCooldown() const;
     void changeCooldown();
-    void step(Simulation &s);
-    const string &getName() const;
-    void addOffer(Coalition &coalition);
+    void addOffer(Coalition *coalition);
 
 private:
     int mId;
@@ -37,6 +38,7 @@ private:
     int mMandates;
     JoinPolicy *mJoinPolicy;
     State mState;
+
     int cooldown;
-    vector<Coalition&> offers;
+    vector<Coalition*> offers;
 };

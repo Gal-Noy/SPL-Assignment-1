@@ -1,18 +1,20 @@
 #pragma once
-#include "Party.h"
-#include "Graph.h"
+#include <vector>
+#include "Coalition.h"
+
+using std::vector;
 
 class JoinPolicy {
     public:
-        virtual Coalition& join(vector<Coalition&> offers)=0;
+        virtual Coalition join(vector<Coalition> offers)=0;
 };
 
 class MandatesJoinPolicy : public JoinPolicy {
     public:
-        virtual Coalition& join(vector<Coalition&> offers);
+        virtual Coalition join(vector<Coalition> offers);
 };
 
 class LastOfferJoinPolicy : public JoinPolicy {
     public:
-        virtual Coalition& join(vector<Coalition&> offers);
+        virtual Coalition join(vector<Coalition> offers);
 };

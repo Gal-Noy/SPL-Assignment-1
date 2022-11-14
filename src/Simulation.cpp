@@ -1,10 +1,8 @@
 #include "Simulation.h"
-#include "Agent.h"
-#include "Graph.h"
-#include <map>
 
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents)
 {
+    //TODO:
     // 1. init coalitions:
     // 1.1. for every agent form a coalition (mandates & availableParties)
     // 1.2. init firstly available parties
@@ -13,28 +11,27 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgen
 
 void Simulation::step()
 {
-    const Graph &graph = getGraph();
-    // 1. parties-step: parties that can answer offers, answer
-    for (int i = 0; i < graph.getNumVertices(); i++){
-        Party party = graph.getParty(i);
-        party.step(*this);
-    }
-
-    // 2. agents-step: select party to offer and offer
-    for (Agent agent : mAgents){
-        agent.step(*this);
-    }
+//    const Graph &graph = getGraph();
+//    // 1. parties-step: parties that can answer offers, answer
+//    for (int i = 0; i < graph.getNumVertices(); i++){
+//        Party party = graph.getParty(i);
+//        party.step(*this);
+//    }
+//
+//    // 2. agents-step: select party to offer and offer
+//    for (Agent agent : mAgents){
+//        agent.step(*this);
+//    }
 }
 
 bool Simulation::shouldTerminate() const
 {
     // should terminate when any coalition reaches 61 mandates or all parties are in state joined
-
-    // check coalitions and return true if mandates >= 61 
+    //TODO:
+    // check coalitions and return true if mandates >= 61
     // check parties and count waiting/collecting offers and return == 0
     // heap? boolean value? stay tuned
 
-    // TODO implement this method
     return true;
 }
 
@@ -67,6 +64,5 @@ const vector<vector<int>> Simulation::getPartiesByCoalitions() const
     // for (auto coalitionVector : map)
     //     ans.push_back(coalitionVector.second);
     // return ans;
+    return vector<vector<int>>{};
 }
-
-

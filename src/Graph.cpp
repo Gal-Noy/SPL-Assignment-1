@@ -1,4 +1,6 @@
 #include "Graph.h"
+//#include "Coalition.h"
+//class Coalition;
 
 Graph::Graph(vector<Party> vertices, vector<vector<int>> edges) : mVertices(vertices), mEdges(edges) 
 {
