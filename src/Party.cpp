@@ -1,14 +1,21 @@
 #include "Party.h"
-#include "Coalition.h"
 #include <vector>
-//#include "Coalition.h"
 
 using std::vector;
 
-Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(name), mMandates(mandates), mJoinPolicy(jp), mState(Waiting), cooldown(-1), offers(vector<Coalition*>{})
+Party::Party(int id, string name, int mandates, JoinPolicy *jp) :
+mId(id),
+mName(name),
+mMandates(mandates),
+mJoinPolicy(jp),
+mState(Waiting),
+cooldown(-1),
+offers(vector<Coalition*>{})
 {
     // TODO: Implement constructor
 }
+
+// TODO: Rule of Five ?
 
 State Party::getState() const
 {
@@ -56,7 +63,7 @@ void Party::step(Simulation &s)
         changeCooldown();
         return;
     }
-//    mJoinPolicy->join(offers, s.getGraph());
+    mJoinPolicy->join(offers); // TODO: can't use coalition, maybe hold a pointer to it as a field?
 
 
     // TODO: join to chosen coalition according to policy & clone agent to agents vector & add neighbors to availableParties
@@ -64,7 +71,7 @@ void Party::step(Simulation &s)
     setState(Joined);
 }
 
-void Party::addOffer(Coalition *coalition)
+void Party::addOffer(Coalition &coalition)
 {
-    offers.push_back(coalition);
+    offers.push_back(&coalition);
 }

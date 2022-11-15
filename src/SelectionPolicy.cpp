@@ -1,6 +1,6 @@
 #include "SelectionPolicy.h"
 
-Party MandatesSelectionPolicy::select(const Graph graph, vector<Party> parties, int partyId)
+Party &MandatesSelectionPolicy::select(vector<Party*> &parties, int partyId)
 {
 //    Party output = parties[0];
 //    for (int i = 1; i < parties.size(); i++)
@@ -10,7 +10,7 @@ Party MandatesSelectionPolicy::select(const Graph graph, vector<Party> parties, 
 }
 
 
-Party EdgeWeightSelectionPolicy::select(const Graph graph, vector<Party> parties, int partyId)
+Party &EdgeWeightSelectionPolicy::select(vector<Party*> &parties, int partyId)
 {
 //    Party output;
 //    int maxEdgeWeight = -1;

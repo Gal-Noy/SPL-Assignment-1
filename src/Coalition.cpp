@@ -3,10 +3,10 @@
 
 using std::vector;
 
-Coalition::Coalition(Agent agent, vector<Party> _existingParties, int _mandates) :
-mAgent(agent),
+Coalition::Coalition(Agent &agent, vector<Party*> &_existingParties, int _mandates) :
+mAgent(&agent),
 existingParties(_existingParties),
-availableParties(vector<Party>{}),
+availableParties(vector<Party*>{}), //TODO: is there a need in "new" here?
 mandates(_mandates)
 {
  // Implementation of constructor
@@ -22,8 +22,8 @@ bool operator>(const Coalition &c1, const Coalition &c2) {
     return c1.getMandates() > c2.getMandates();
 }
 
-const Agent Coalition::getAgent() const {
-    return mAgent;
+const Agent &Coalition::getAgent() const {
+    return *mAgent;
 }
 
 int Coalition::getMandates() const {
@@ -34,24 +34,24 @@ void Coalition::addMandates(int toAdd) {
     mandates += toAdd;
 }
 
-vector<Party> Coalition::getParties() const {
+vector<Party*> &Coalition::getParties() {
     return existingParties;
 }
 
-void Coalition::addParty(Party party) {  //adds party to existing and removes from available
-    existingParties.push_back(party);
+void Coalition::addParty(Party &party) {  //adds party to existing and removes from available
+    existingParties.push_back(&party);
     addMandates(party.getMandates());
     int id = party.getId();
     for (int i = 0; i < availableParties.size(); i++) {
-        if (availableParties[i].getId() == id)
+        if (availableParties[i]->getId() == id)
             availableParties.erase(availableParties.begin() + i); // TODO: must debug!!!
     }
 }
 
-vector<Party> Coalition::getAvailableParties() const {
+vector<Party*> &Coalition::getAvailableParties() {
     return availableParties;
 }
 
-void Coalition::addAvailableParty(Party party) {
-    availableParties.push_back(party);
+void Coalition::addAvailableParty(Party &party) {
+    availableParties.push_back(&party);
 }

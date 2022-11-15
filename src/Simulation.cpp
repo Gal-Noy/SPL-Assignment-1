@@ -3,9 +3,9 @@
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents)
 {
     //TODO:
-    // 1. init coalitions:
-    // 1.1. for every agent form a coalition (mandates & availableParties)
-    // 1.2. init firstly available parties
+    // 1. init coalitions on HEAP:
+    //  1.1. for every agent form a coalition (mandates & availableParties)
+    //  1.2. init firstly available parties
 
 }
 

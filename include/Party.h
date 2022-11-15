@@ -1,11 +1,12 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "JoinPolicy.h"
 
 using std::string;
 using std::vector;
 
-class JoinPolicy;
+//class JoinPolicy; TODO: removed their FD, because we implemented a method inside this class which we use!
 class Simulation;
 class Coalition;
 
@@ -20,6 +21,7 @@ class Party
 {
 public:
     Party(int id, string name, int mandates, JoinPolicy *);
+    // TODO: Rule of Five (I believe yes)
 
     State getState() const;
     void setState(State state);
@@ -30,7 +32,7 @@ public:
     int getId() const;
     int getCooldown() const;
     void changeCooldown();
-    void addOffer(Coalition *coalition);
+    void addOffer(Coalition &coalition);
 
 private:
     int mId;

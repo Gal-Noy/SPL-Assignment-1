@@ -1,17 +1,21 @@
 #pragma once
-#include "Simulation.h"
+#include <vector>
+
+using std::vector;
+
+class Party;
 
 class SelectionPolicy {
 public:
-    virtual Party select(const Graph, vector<Party>, int)=0;
+    virtual Party& select(vector<Party*>&, int)=0;
 };
 
 class MandatesSelectionPolicy: public SelectionPolicy{
 public:
-    Party select(const Graph, vector<Party>, int);
+    Party& select(vector<Party*>&, int);
 };
 
 class EdgeWeightSelectionPolicy: public SelectionPolicy{
 public:
-    Party select(const Graph, vector<Party>, int);
+    Party& select(vector<Party*>&, int);
 };

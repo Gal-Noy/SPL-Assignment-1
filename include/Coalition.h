@@ -1,13 +1,17 @@
 #pragma once
 
 #include <vector>
-#include "Simulation.h"
+#include "Party.h"
+
+//TODO: I believe includes and FD are done in here god dammit
+
+class Agent;
 
 using std::vector;
 
 class Coalition {
 public:
-    Coalition(Agent agent, vector<Party> existingParties, int mandates);
+    Coalition(Agent &agent, vector<Party*> &existingParties, int mandates);
 //    virtual ~Coalition();
 //    Coalition(const Coalition &other);
 //    Coalition &operator=(const Coalition &other);
@@ -15,17 +19,19 @@ public:
 
     friend bool operator>(const Coalition &c1, const Coalition &c2);
 
-    const Agent getAgent() const;
+    const Agent &getAgent() const;
     int getMandates() const;
     void addMandates(int toAdd);
-    vector<Party> getParties() const;
-    void addParty(Party party); //adds party to existing and removes from available
-    vector<Party> getAvailableParties() const;
-    void addAvailableParty(Party party);
+    vector<Party*> &getParties();
+    void addParty(Party &party);
+    vector<Party*> &getAvailableParties();
+    void addAvailableParty(Party &party);
 
 private:
-    Agent mAgent;
-    vector<Party> existingParties;
-    vector<Party> availableParties;
+    Agent *mAgent;
+    vector<Party*> existingParties;
+    vector<Party*> availableParties;
     int mandates;
 };
+
+
