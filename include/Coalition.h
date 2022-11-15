@@ -1,17 +1,16 @@
 #pragma once
-
-#include <vector>
-#include "Party.h"
+#include <set>
 
 //TODO: I believe includes and FD are done in here god dammit
 
 class Agent;
+class Party;
 
-using std::vector;
+using std::set;
 
 class Coalition {
 public:
-    Coalition(Agent &agent, vector<Party*> &existingParties, int mandates);
+    Coalition(Agent &agent, set<Party*> &existingParties, int mandates);
 //    virtual ~Coalition();
 //    Coalition(const Coalition &other);
 //    Coalition &operator=(const Coalition &other);
@@ -22,15 +21,15 @@ public:
     const Agent &getAgent() const;
     int getMandates() const;
     void addMandates(int toAdd);
-    vector<Party*> &getParties();
-    void addParty(Party &party);
-    vector<Party*> &getAvailableParties();
+    set<Party*> &getParties();
+    void addParty(Party &party, int mandates);
+    set<Party*> &getAvailableParties();
     void addAvailableParty(Party &party);
 
 private:
     Agent *mAgent;
-    vector<Party*> existingParties;
-    vector<Party*> availableParties;
+    set<Party*> existingParties;
+    set<Party*> availableParties;
     int mandates;
 };
 

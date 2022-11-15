@@ -19,7 +19,7 @@ int Agent::getPartyId() const
 
 void Agent::step(Simulation &sim)
 {
-    // TODO: implement this method
+    // TODO: Add Coalition field to agent
     // get availableParties
     // select party from availableParties according to policy
     // remove party from availableParties

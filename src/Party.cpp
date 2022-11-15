@@ -1,7 +1,4 @@
 #include "Party.h"
-#include <vector>
-
-using std::vector;
 
 Party::Party(int id, string name, int mandates, JoinPolicy *jp) :
 mId(id),
@@ -63,7 +60,8 @@ void Party::step(Simulation &s)
         changeCooldown();
         return;
     }
-    mJoinPolicy->join(offers); // TODO: can't use coalition, maybe hold a pointer to it as a field?
+    Coalition toJoin = mJoinPolicy->join(offers);
+//    vector<Agent> & agents = s.getAgents(); TODO: I believe we'll need a clone agent function (inside coalition/party)
 
 
     // TODO: join to chosen coalition according to policy & clone agent to agents vector & add neighbors to availableParties

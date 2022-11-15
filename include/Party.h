@@ -2,13 +2,12 @@
 #include <string>
 #include <vector>
 #include "JoinPolicy.h"
+#include "Coalition.h"
 
 using std::string;
 using std::vector;
 
-//class JoinPolicy; TODO: removed their FD, because we implemented a method inside this class which we use!
 class Simulation;
-class Coalition;
 
 enum State
 {
