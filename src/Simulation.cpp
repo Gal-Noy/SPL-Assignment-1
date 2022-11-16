@@ -83,3 +83,8 @@ const vector<vector<int>> Simulation::getPartiesByCoalitions() const {
         ans.push_back(coalitionVector.second);
     return ans;
 }
+
+void Simulation::cloneAgent(const Agent &agent, int partyId) {
+    auto *toAdd = new Agent(mAgents.size(), partyId, agent.getSelectionPolicy());
+    mAgents.push_back(*toAdd);
+}

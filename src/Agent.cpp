@@ -23,6 +23,10 @@ void Agent::setCoalition(Coalition *coalition) {
     mCoalition = coalition;
 }
 
+SelectionPolicy *Agent::getSelectionPolicy() const{
+    return mSelectionPolicy;
+}
+
 void Agent::step(Simulation &sim) {
     // TODO: Add Coalition field to agent
     // get availableParties

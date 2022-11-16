@@ -19,6 +19,8 @@ public:
 
     void step(Simulation &);
 
+    SelectionPolicy *getSelectionPolicy() const;
+
 private:
     int mAgentId;
     int mPartyId;

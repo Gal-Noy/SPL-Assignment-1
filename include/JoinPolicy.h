@@ -7,15 +7,15 @@ using std::vector;
 
 class JoinPolicy {
     public:
-        virtual Coalition& join(vector<Coalition*>& offers)=0;
+        virtual Coalition& choose(vector<Coalition*>& offers)=0;
 };
 
 class MandatesJoinPolicy : public JoinPolicy {
     public:
-        virtual Coalition& join(vector<Coalition*>& offers);
+        virtual Coalition& choose(vector<Coalition*>& offers);
 };
 
 class LastOfferJoinPolicy : public JoinPolicy {
     public:
-        virtual Coalition& join(vector<Coalition*>& offers);
+        virtual Coalition& choose(vector<Coalition*>& offers);
 };
