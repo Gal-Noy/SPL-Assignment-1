@@ -1,12 +1,14 @@
 #pragma once
 
 #include <vector>
+#include <map>
 
 #include "Graph.h"
 #include "Agent.h"
 
 using std::string;
 using std::vector;
+using std::map;
 
 class Simulation
 {
