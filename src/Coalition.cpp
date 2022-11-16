@@ -1,9 +1,10 @@
+#include <vector>
 #include "Coalition.h"
 
-Coalition::Coalition(Agent &agent, set<Party*> &_existingParties, int _mandates) :
+Coalition::Coalition(Agent &agent, std::vector<const Party *> _existingParties, int _mandates) :
 mAgent(&agent),
 existingParties(_existingParties),
-availableParties(set<Party*>{}), //TODO: is there a need in "new" here?
+availableParties(set<const Party*>{}), //TODO: is there a need in "new" here?
 mandates(_mandates)
 {
  // Implementation of constructor
@@ -31,20 +32,20 @@ void Coalition::addMandates(int toAdd) {
     mandates += toAdd;
 }
 
-set<Party*> &Coalition::getParties() {
+vector<const Party*> &Coalition::getParties() {
     return existingParties;
 }
 
-void Coalition::addParty(Party &party, int mandates) {
-    existingParties.insert(&party);
+void Coalition::addParty(const Party &party, int mandates) {
+    existingParties.push_back(&party);
     addMandates(mandates);
     availableParties.erase(&party);
 }
 
-set<Party*> &Coalition::getAvailableParties() {
+set<const Party*> &Coalition::getAvailableParties() {
     return availableParties;
 }
 
-void Coalition::addAvailableParty(Party &party) {
+void Coalition::addAvailableParty(const Party &party) {
     availableParties.insert(&party);
 }

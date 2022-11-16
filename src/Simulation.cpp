@@ -1,10 +1,21 @@
 #include "Simulation.h"
 
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents) {
-    //TODO:
-    // 1. init coalitions on HEAP:
-    //  1.1. for every agent form a coalition (mandates & availableParties)
-    //  1.2. init firstly available parties
+
+    for (Agent agent: agents) {
+        int mandates = getParty(agent.getPartyId()).getMandates();
+        Coalition *coalition = agent.getCoalition();
+        const Party &party = getParty(agent.getPartyId());
+        agent.setCoalition(new Coalition(agent, vector<const Party *>{}, mandates));
+        coalition->addParty(party, mandates);
+
+        for (int i = 0; i < graph.getNumVertices(); i++) {
+            const Party &partyToAdd = getParty(i);
+            if (graph.getEdgeWeight(party.getId(), i) != 0 && partyToAdd.getState() != Joined)
+                coalition->addAvailableParty(partyToAdd);
+        }
+    }
+
 
 }
 
@@ -28,16 +39,16 @@ bool Simulation::shouldTerminate() const {
     // check coalitions and return true if mandates >= 61
     vector<vector<int>> politicalMap = getPartiesByCoalitions();
     int mandates = 0;
-    for (const vector<int>& coalition: politicalMap) {
-        for (int partyId: coalition) {
+    for (const vector<int> &coalition: politicalMap) {
+        for (int partyId: coalition)
             mandates += getParty(partyId).getMandates();
-        }
+
         if (mandates > 60) return true;
         mandates = 0;
     }
 
     // check parties and count waiting/collecting offers and return == 0
-    for (int i = 0; i < getGraph().getNumVertices(); i++){
+    for (int i = 0; i < getGraph().getNumVertices(); i++) {
         Party party = getParty(i);
         if (party.getState() != Joined) return false;
     }
