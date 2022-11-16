@@ -24,3 +24,11 @@ const Party &Graph::getParty(int partyId) const
 {
     return mVertices[partyId];
 }
+
+void Graph::addAvailableNeighbors(int partyId, Coalition *coalition) const{
+    for (int i = 0; i < getNumVertices(); i++) {
+        const Party &partyToAdd = getParty(i);
+        if (getEdgeWeight(partyId, i) != 0 && partyToAdd.getState() != Joined)
+            coalition->addAvailableParty(partyToAdd);
+    }
+}

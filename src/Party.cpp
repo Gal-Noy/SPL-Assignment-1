@@ -34,10 +34,6 @@ int Party::getId() const {
     return mId;
 }
 
-int Party::getCooldown() const {
-    return cooldown;
-}
-
 void Party::changeCooldown() {
     if (cooldown < 0)
         cooldown = 2;
@@ -53,20 +49,13 @@ void Party::step(Simulation &s) {
         changeCooldown();
         return;
     }
-    Coalition &toJoin = mJoinPolicy->choose(offers);
+    Coalition *toJoin = mJoinPolicy->choose(offers);
     const Party &self = *this;
-    toJoin.addParty(self, this->getMandates());
-    s.cloneAgent(toJoin.getAgent(), this->getId());
+    toJoin->addParty(self, this->getMandates());
+    s.cloneAgent(toJoin->getAgent(), mId);
 
-    //TODO: clone agent: add agent of joined party to vector agents
-
-
-
-
-    //TODO: I believe we'll need a clone agent function (inside coalition/party)
-
-
-    // TODO: join to chosen coalition according to policy & clone agent to agents vector & add neighbors to availableParties
+    const Graph &graph = s.getGraph();
+    graph.addAvailableNeighbors(mId, toJoin);
 
     setState(Joined);
 }

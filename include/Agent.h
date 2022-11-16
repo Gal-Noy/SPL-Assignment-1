@@ -8,6 +8,7 @@
 class Agent {
 public:
     Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy);
+    //TODO: Rule of Five
 
     int getId() const;
 

@@ -8,12 +8,7 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgen
         const Party &party = getParty(agent.getPartyId());
         agent.setCoalition(new Coalition(agent, vector<const Party *>{}, mandates));
         coalition->addParty(party, mandates);
-
-        for (int i = 0; i < graph.getNumVertices(); i++) {
-            const Party &partyToAdd = getParty(i);
-            if (graph.getEdgeWeight(party.getId(), i) != 0 && partyToAdd.getState() != Joined)
-                coalition->addAvailableParty(partyToAdd);
-        }
+        graph.addAvailableNeighbors(party.getId(), coalition);
     }
 
 
@@ -71,7 +66,7 @@ const Party &Simulation::getParty(int partyId) const {
 /// This method returns a "coalition" vector, where each element is a vector of party IDs in the coalition.
 /// At the simulation initialization - the result will be [[agent0.partyId], [agent1.partyId], ...]
 const vector<vector<int>> Simulation::getPartiesByCoalitions() const {
-    std::map<Coalition *, vector<int>> map;
+    std::map<Coalition*, vector<int>> map;
     for (Agent agent: getAgents()) {
         if (map.find(agent.getCoalition()) == map.end())
             map[agent.getCoalition()] = vector<int>();

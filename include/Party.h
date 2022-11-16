@@ -30,7 +30,6 @@ public:
     const string &getName() const;
 
     int getId() const;
-    int getCooldown() const;
     void changeCooldown();
     void addOffer(Coalition &coalition);
 
