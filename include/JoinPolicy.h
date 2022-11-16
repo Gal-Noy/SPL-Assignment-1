@@ -6,6 +6,8 @@ class Coalition;
 
 using std::vector;
 
+//TODO: IMPLEMENT DESTRUCTOR
+
 class JoinPolicy {
 public:
     virtual Coalition *choose(vector<Coalition *> &offers) = 0;

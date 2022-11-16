@@ -8,7 +8,11 @@
 class Agent {
 public:
     Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy);
-    //TODO: Rule of Five
+    virtual ~Agent();
+    Agent(const Agent &other);
+    Agent(Agent &&other);
+    Agent &operator=(const Agent &other);
+    Agent &operator=(Agent &&other);
 
     int getId() const;
 

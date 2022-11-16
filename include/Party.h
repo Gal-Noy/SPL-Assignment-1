@@ -21,7 +21,9 @@ class Party
 {
 public:
     Party(int id, string name, int mandates, JoinPolicy *);
-    // TODO: Rule of Five (I believe yes)
+    virtual ~Party();
+    Party(const Party &other);
+    Party &operator=(const Party &other);
 
     State getState() const;
     void setState(State state);

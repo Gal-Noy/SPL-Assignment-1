@@ -15,10 +15,10 @@ using std::vector;
 class Coalition {
 public:
     Coalition(Agent &agent, vector<const Party *> existingParties, int mandates);
-//    virtual ~Coalition();
-//    Coalition(const Coalition &other);
-//    Coalition &operator=(const Coalition &other);
-//    Coalition &operator=(Coalition &&other);
+    virtual ~Coalition();
+    Coalition(const Coalition &other);
+    Coalition &operator=(const Coalition &other);
+    Coalition &operator=(Coalition &&other);
 
     friend bool operator>(const Coalition &c1, const Coalition &c2);
 

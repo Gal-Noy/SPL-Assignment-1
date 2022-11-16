@@ -5,7 +5,48 @@ Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgen
                                                                            mSelectionPolicy(selectionPolicy) {
 }
 
-// TODO: Rule of Five ?
+Agent::~Agent() { // destructor
+    if (mCoalition) delete mCoalition;
+    if (mSelectionPolicy) delete mSelectionPolicy;
+}
+
+Agent::Agent(const Agent &other){ // copy constructor
+    mAgentId = other.mAgentId;
+    mPartyId = other.mPartyId;
+    mCoalition = new Coalition(*(other.mCoalition));
+    mSelectionPolicy = new SelectionPolicy(*(other.mSelectionPolicy));
+}
+
+Agent::Agent(Agent &&other){ // move constructor
+    mAgentId = other.mAgentId;
+    mPartyId = other.mPartyId;
+    mCoalition = other.mCoalition;
+    other.mCoalition = nullptr;
+    mSelectionPolicy = other.mSelectionPolicy;
+    other.mSelectionPolicy = nullptr;
+}
+
+Agent &Agent::operator=(const Agent &other) { // copy assignment operator
+    if (this != &other){
+        mAgentId = other.mAgentId;
+        mPartyId = other.mPartyId;
+        *mCoalition = *other.mCoalition;
+        *mSelectionPolicy = *other.mSelectionPolicy;
+    }
+    return *this;
+}
+
+Agent &Agent::operator=(Agent &&other){ // move assignment operator
+    mAgentId = other.mAgentId;
+    mPartyId = other.mPartyId;
+    if (mCoalition) delete mCoalition;
+    mCoalition = other.mCoalition;
+    other.mCoalition = nullptr;
+    if (mSelectionPolicy) delete mSelectionPolicy;
+    mSelectionPolicy = other.mSelectionPolicy;
+    other.mSelectionPolicy = nullptr;
+    return *this;
+}
 
 int Agent::getId() const {
     return mAgentId;
