@@ -14,10 +14,7 @@ Agent::Agent(const Agent &other) { // copy constructor
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId;
     mCoalition = new Coalition(*(other.mCoalition));
-    if (dynamic_cast<MandatesSelectionPolicy *>(other.mSelectionPolicy) != nullptr)
-        mSelectionPolicy = new MandatesSelectionPolicy();
-    else
-        mSelectionPolicy = new EdgeWeightSelectionPolicy();
+    mSelectionPolicy = other.mSelectionPolicy;
 }
 
 Agent::Agent(Agent &&other) { // move constructor
