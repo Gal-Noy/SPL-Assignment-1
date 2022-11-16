@@ -16,11 +16,11 @@ int main(int argc, char **argv)
 
     // read simulation from config file
     const string config_path = argv[1];
-
-    Simulation simulation = Parser::readSimulation(argv[1]);
     std::cout << "hey" << std::endl; // to remove
+    Simulation simulation = Parser::readSimulation(argv[1]); // TODO: the problem is here
+
     // run simulation and store json state after each iteration
-    vector<json> outPerIter = {Parser::makeJson(simulation)}; //    TODO: there's a problem here!!!
+    vector<json> outPerIter = {Parser::makeJson(simulation)};
     while (!simulation.shouldTerminate())
     {
         simulation.step();

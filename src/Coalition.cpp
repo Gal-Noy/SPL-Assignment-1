@@ -1,6 +1,8 @@
 #include <utility>
 #include <vector>
 #include "Coalition.h"
+#include "Party.h"
+#include "Agent.h"
 
 Coalition::Coalition(Agent &agent, vector<const Party *> _existingParties, int _mandates) :
 mAgent(&agent),
@@ -11,53 +13,62 @@ mandates(_mandates)
  // Implementation of constructor
 }
 
-//Coalition::~Coalition() { // destructor
-//    if (mAgent) delete mAgent;
-//    for (const Party * party : existingParties){
-//        delete party;
-//    }
-//    for (auto & party : existingParties){
-//        delete party;
-//    }
-//}
-//
-//Agent::Agent(const Agent &other){ // copy constructor
-//    mAgentId = other.mAgentId;
-//    mPartyId = other.mPartyId;
-//    mCoalition = new Coalition(*(other.mCoalition));
-//    mSelectionPolicy = new SelectionPolicy(*(other.mSelectionPolicy));
-//}
-//
-//Agent::Agent(Agent &&other){ // move constructor
-//    mAgentId = other.mAgentId;
-//    mPartyId = other.mPartyId;
-//    mCoalition = other.mCoalition;
-//    other.mCoalition = nullptr;
-//    mSelectionPolicy = other.mSelectionPolicy;
-//    other.mSelectionPolicy = nullptr;
-//}
-//
-//Agent &Agent::operator=(const Agent &other) { // copy assignment operator
-//    if (this != &other){
-//        mAgentId = other.mAgentId;
-//        mPartyId = other.mPartyId;
-//        *mCoalition = *other.mCoalition;
-//        *mSelectionPolicy = *other.mSelectionPolicy;
-//    }
-//    return *this;
-//}
-//
-//Agent &Agent::operator=(Agent &&other){ // move assignment operator
-//    mAgentId = other.mAgentId;
-//    mPartyId = other.mPartyId;
-//    if (mCoalition) delete mCoalition;
-//    mCoalition = other.mCoalition;
-//    other.mCoalition = nullptr;
-//    if (mSelectionPolicy) delete mSelectionPolicy;
-//    mSelectionPolicy = other.mSelectionPolicy;
-//    other.mSelectionPolicy = nullptr;
-//    return *this;
-//}
+Coalition::~Coalition() { // destructor
+    if (mAgent) delete mAgent;
+    for (const Party * party : existingParties){
+        delete party;
+    }
+    for (const Party * party : offeredParties){
+        delete party;
+    }
+}
+
+Coalition::Coalition(const Coalition &other){ // copy constructor
+    mandates = other.mandates;
+    mAgent = new Agent(*(other.mAgent));
+    existingParties = *new vector<const Party *>(other.existingParties);
+    offeredParties = *new set<const Party *>(other.offeredParties);
+}
+
+Coalition::Coalition(Coalition &&other){ // move constructor
+    mandates = other.mandates;
+    mAgent = other.mAgent;
+    other.mAgent = nullptr;
+    existingParties = other.existingParties;
+    for (const Party * party : existingParties){
+        delete party;
+    }
+    offeredParties = other.offeredParties;
+    for (const Party * party : offeredParties){
+        delete party;
+    }
+}
+
+Coalition &Coalition::operator=(const Coalition &other) { // copy assignment operator
+    if (this != &other){
+        mandates = other.mandates;
+        *mAgent = *other.mAgent;
+        existingParties = other.existingParties;
+        offeredParties = other.offeredParties;
+    }
+    return *this;
+}
+
+Coalition &Coalition::operator=(Coalition &&other){ // move assignment operator
+    mandates = other.mandates;
+    if (mAgent) delete mAgent;
+    mAgent = other.mAgent;
+    other.mAgent = nullptr;
+    for (const Party * party : existingParties){
+        delete party;
+    }
+    existingParties = other.existingParties;
+    for (const Party * party : offeredParties){
+        delete party;
+    }
+    offeredParties = other.offeredParties;
+    return *this;
+}
 
 bool operator>(const Coalition &c1, const Coalition &c2) {
     return c1.getMandates() > c2.getMandates();
