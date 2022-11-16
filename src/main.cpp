@@ -7,7 +7,6 @@ using std::endl;
 
 int main(int argc, char **argv)
 {
-
     if (argc != 2)
     {
         cout << "usage: " << argv[0] << " <config_path>" << endl;
@@ -16,11 +15,10 @@ int main(int argc, char **argv)
 
     // read simulation from config file
     const string config_path = argv[1];
-
     Simulation simulation = Parser::readSimulation(argv[1]);
-    std::cout << "hey" << std::endl; // to remove
+
     // run simulation and store json state after each iteration
-    vector<json> outPerIter = {Parser::makeJson(simulation)}; //    TODO: there's a problem here!!!
+    vector<json> outPerIter = {Parser::makeJson(simulation)};
     while (!simulation.shouldTerminate())
     {
         simulation.step();

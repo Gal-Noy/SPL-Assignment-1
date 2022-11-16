@@ -132,6 +132,7 @@ json Parser::makeJson(const Simulation &s)
         parties.push_back(party);
     }
     out["parties"] = parties;
+
     // we want to save for each agent: partyId
     vector<json> agents;
     for (const Agent &agent : s.getAgents())
@@ -142,10 +143,10 @@ json Parser::makeJson(const Simulation &s)
         agents.push_back(jAgent);
     }
     out["agents"] = agents;
+
     // we want to save for each coalition: list of parties and number of mandates
     vector<json> coalitions;
     const vector<vector<int>> coalitionsParties = s.getPartiesByCoalitions();
-
     for (size_t i = 0; i < coalitionsParties.size(); i++)
     {
         json coalition;
@@ -161,11 +162,10 @@ json Parser::makeJson(const Simulation &s)
         coalition["mandates"] = mandates;
         coalitions.push_back(coalition);
     }
-
     out["coalitions"] = coalitions;
+
     // we want to save for edges: from, to, weight
     vector<json> edges;
-
     for (int i = 0; i < g.getNumVertices(); i++)
     {
         for (int j = 0; j < g.getNumVertices(); j++)
