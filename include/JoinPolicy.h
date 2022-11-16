@@ -13,10 +13,10 @@ public:
 
 class MandatesJoinPolicy : public JoinPolicy {
 public:
-    virtual Coalition *choose(vector<Coalition *> &offers);
+    Coalition *choose(vector<Coalition *> &offers) override;
 };
 
 class LastOfferJoinPolicy : public JoinPolicy {
 public:
-    virtual Coalition *choose(vector<Coalition *> &offers);
+    Coalition *choose(vector<Coalition *> &offers) override;
 };

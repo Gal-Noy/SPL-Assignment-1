@@ -1,6 +1,8 @@
 #include "Graph.h"
 
-Graph::Graph(vector<Party> vertices, vector<vector<int>> edges) : mVertices(vertices), mEdges(edges)
+#include <utility>
+
+Graph::Graph(vector<Party> vertices, vector<vector<int>> edges) : mVertices(std::move(vertices)), mEdges(std::move(edges))
 {
     // You can change the implementation of the constructor, but not the signature!
 }
@@ -17,18 +19,10 @@ int Graph::getEdgeWeight(int v1, int v2) const
 
 int Graph::getNumVertices() const
 {
-    return mVertices.size();
+    return (int) mVertices.size();
 }
 
 const Party &Graph::getParty(int partyId) const
 {
     return mVertices[partyId];
-}
-
-void Graph::addAvailableNeighbors(int partyId, Coalition *coalition) const{
-    for (int i = 0; i < getNumVertices(); i++) {
-        const Party &partyToAdd = getParty(i);
-        if (getEdgeWeight(partyId, i) != 0 && partyToAdd.getState() != Joined)
-            coalition->addAvailableParty(partyToAdd);
-    }
 }

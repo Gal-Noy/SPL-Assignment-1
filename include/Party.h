@@ -32,6 +32,7 @@ public:
     int getId() const;
     void changeCooldown();
     void addOffer(Coalition &coalition);
+    const vector<Coalition*> &getOffers() const;
 
 private:
     int mId;
@@ -39,7 +40,6 @@ private:
     int mMandates;
     JoinPolicy *mJoinPolicy;
     State mState;
-
     int cooldown;
     vector<Coalition*> offers;
 };

@@ -17,8 +17,6 @@ public:
 
     const Party &getParty(int partyId) const;
 
-    void addAvailableNeighbors(int partyId, Coalition *coalition) const;
-
 private:
     vector<Party> mVertices;
     vector<vector<int>> mEdges;

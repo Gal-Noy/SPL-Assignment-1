@@ -1,10 +1,12 @@
 #pragma once
+
 #include <set>
 #include <vector>
 
 //TODO: I believe includes and FD are done in here god dammit
 
 class Agent;
+
 class Party;
 
 using std::set;
@@ -21,17 +23,21 @@ public:
     friend bool operator>(const Coalition &c1, const Coalition &c2);
 
     const Agent &getAgent() const;
+
     int getMandates() const;
+
     void addMandates(int toAdd);
-    vector<const Party*> &getParties();
+
     void addParty(const Party &, int mandates);
-    set<const Party*> &getAvailableParties();
-    void addAvailableParty(const Party &party);
+
+    void offerParty(const Party &);
+
+    const set<const Party *> &getOfferedParties() const;
 
 private:
     Agent *mAgent;
-    vector<const Party*> existingParties;
-    set<const Party*> availableParties;
+    vector<const Party *> existingParties;
+    set<const Party *> offeredParties;
     int mandates;
 };
 

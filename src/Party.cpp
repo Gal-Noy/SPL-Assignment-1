@@ -1,9 +1,11 @@
 #include "Party.h"
+
+#include <utility>
 #include "Simulation.h"
 
 Party::Party(int id, string name, int mandates, JoinPolicy *jp) :
         mId(id),
-        mName(name),
+        mName(std::move(name)),
         mMandates(mandates),
         mJoinPolicy(jp),
         mState(Waiting),
@@ -54,12 +56,13 @@ void Party::step(Simulation &s) {
     toJoin->addParty(self, this->getMandates());
     s.cloneAgent(toJoin->getAgent(), mId);
 
-    const Graph &graph = s.getGraph();
-    graph.addAvailableNeighbors(mId, toJoin);
-
     setState(Joined);
 }
 
 void Party::addOffer(Coalition &coalition) {
     offers.push_back(&coalition);
+}
+
+const vector<Coalition *> &Party::getOffers() const {
+    return offers;
 }

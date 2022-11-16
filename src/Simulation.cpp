@@ -1,14 +1,15 @@
 #include "Simulation.h"
 
-Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents) {
+#include <utility>
+
+Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(graph)), mAgents(agents) {
 
     for (Agent agent: agents) {
         int mandates = getParty(agent.getPartyId()).getMandates();
-        Coalition *coalition = agent.getCoalition();
+        Coalition &coalition = agent.getCoalition();
         const Party &party = getParty(agent.getPartyId());
         agent.setCoalition(new Coalition(agent, vector<const Party *>{}, mandates));
-        coalition->addParty(party, mandates);
-        graph.addAvailableNeighbors(party.getId(), coalition);
+        coalition.addParty(party, mandates);
     }
 
 
@@ -68,9 +69,9 @@ const Party &Simulation::getParty(int partyId) const {
 const vector<vector<int>> Simulation::getPartiesByCoalitions() const {
     std::map<Coalition*, vector<int>> map;
     for (Agent agent: getAgents()) {
-        if (map.find(agent.getCoalition()) == map.end())
-            map[agent.getCoalition()] = vector<int>();
-        map[agent.getCoalition()].push_back(agent.getPartyId());
+        if (map.find(&agent.getCoalition()) == map.end())
+            map[&agent.getCoalition()] = vector<int>();
+        map[&agent.getCoalition()].push_back(agent.getPartyId());
     }
 
     vector<vector<int>> ans;
@@ -80,6 +81,7 @@ const vector<vector<int>> Simulation::getPartiesByCoalitions() const {
 }
 
 void Simulation::cloneAgent(const Agent &agent, int partyId) {
-    auto *toAdd = new Agent(mAgents.size(), partyId, agent.getSelectionPolicy());
+    auto *toAdd = new Agent((int) mAgents.size(), partyId, agent.getSelectionPolicy());
+    toAdd->setCoalition(&agent.getCoalition());
     mAgents.push_back(*toAdd);
 }
