@@ -11,10 +11,13 @@ Party::Party(int id, string name, int mandates, JoinPolicy *jp) :
         mState(Waiting),
         cooldown(-1),
         offers(vector<Coalition *>{}) {
-    // TODO: Implement constructor
 }
 
-// TODO: Rule of Five ?
+//    virtual ~Party(); // destructor
+//    Party(const Party &other); // copy constructor
+//    Party(Party &&other); // move constructor
+//    Party &operator=(const Party &other); // copy assignment operator
+//    Party &operator=(Party &&other); // move assignment operator
 
 State Party::getState() const {
     return mState;

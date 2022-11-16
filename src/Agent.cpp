@@ -10,14 +10,17 @@ Agent::~Agent() { // destructor
     if (mSelectionPolicy) delete mSelectionPolicy;
 }
 
-Agent::Agent(const Agent &other){ // copy constructor
+Agent::Agent(const Agent &other) { // copy constructor
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId;
     mCoalition = new Coalition(*(other.mCoalition));
-    mSelectionPolicy = new SelectionPolicy(*(other.mSelectionPolicy));
+    if (dynamic_cast<MandatesSelectionPolicy *>(other.mSelectionPolicy) != nullptr)
+        mSelectionPolicy = new MandatesSelectionPolicy();
+    else
+        mSelectionPolicy = new EdgeWeightSelectionPolicy();
 }
 
-Agent::Agent(Agent &&other){ // move constructor
+Agent::Agent(Agent &&other) { // move constructor
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId;
     mCoalition = other.mCoalition;
@@ -27,7 +30,7 @@ Agent::Agent(Agent &&other){ // move constructor
 }
 
 Agent &Agent::operator=(const Agent &other) { // copy assignment operator
-    if (this != &other){
+    if (this != &other) {
         mAgentId = other.mAgentId;
         mPartyId = other.mPartyId;
         *mCoalition = *other.mCoalition;
@@ -36,7 +39,7 @@ Agent &Agent::operator=(const Agent &other) { // copy assignment operator
     return *this;
 }
 
-Agent &Agent::operator=(Agent &&other){ // move assignment operator
+Agent &Agent::operator=(Agent &&other) { // move assignment operator
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId;
     if (mCoalition) delete mCoalition;
