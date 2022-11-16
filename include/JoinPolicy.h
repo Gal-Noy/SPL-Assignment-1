@@ -1,7 +1,21 @@
 #pragma once
+#include <vector>
 
-class JoinPolicy {};
+class Coalition;
 
-class MandatesJoinPolicy : public JoinPolicy {};
+using std::vector;
 
-class LastOfferJoinPolicy : public JoinPolicy {};
+class JoinPolicy {
+    public:
+        virtual Coalition& join(vector<Coalition*>& offers)=0;
+};
+
+class MandatesJoinPolicy : public JoinPolicy {
+    public:
+        virtual Coalition& join(vector<Coalition*>& offers);
+};
+
+class LastOfferJoinPolicy : public JoinPolicy {
+    public:
+        virtual Coalition& join(vector<Coalition*>& offers);
+};

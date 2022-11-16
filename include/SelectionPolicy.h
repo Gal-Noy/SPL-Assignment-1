@@ -1,7 +1,21 @@
 #pragma once
+#include <vector>
 
-class SelectionPolicy { };
+using std::vector;
 
-class MandatesSelectionPolicy: public SelectionPolicy{ };
+class Party;
 
-class EdgeWeightSelectionPolicy: public SelectionPolicy{ };
+class SelectionPolicy {
+public:
+    virtual Party& select(vector<Party*>&, int)=0;
+};
+
+class MandatesSelectionPolicy: public SelectionPolicy{
+public:
+    Party& select(vector<Party*>&, int);
+};
+
+class EdgeWeightSelectionPolicy: public SelectionPolicy{
+public:
+    Party& select(vector<Party*>&, int);
+};
