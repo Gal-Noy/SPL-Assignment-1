@@ -26,8 +26,6 @@ public:
 
     int getMandates() const;
 
-    void addMandates(int toAdd);
-
     void addParty(const Party &, int mandates);
 
     void offerParty(const Party &);
@@ -40,5 +38,4 @@ private:
     set<const Party *> offeredParties;
     int mandates;
 };
-
 

@@ -1,7 +1,5 @@
 #include "Simulation.h"
 
-#include <utility>
-
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(graph)), mAgents(agents) {
 
     for (Agent agent: agents) {
@@ -9,7 +7,7 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(gra
         Coalition &coalition = agent.getCoalition();
         const Party &party = getParty(agent.getPartyId());
         agent.setCoalition(new Coalition(agent, vector<const Party *>{}, mandates));
-        coalition.addParty(party, mandates);
+//        coalition.addParty(party, mandates);
     }
 
 
