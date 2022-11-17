@@ -16,17 +16,18 @@ int main(int argc, char **argv)
 
     // read simulation from config file
     const string config_path = argv[1];
-    std::cout << "hey" << std::endl; // to remove
-    Simulation simulation = Parser::readSimulation(argv[1]); // TODO: the problem is here
+
+    Simulation simulation = Parser::readSimulation(argv[1]);
 
     // run simulation and store json state after each iteration
     vector<json> outPerIter = {Parser::makeJson(simulation)};
+    std::cout << "Simulation Started!" << std::endl; /// to remove
     while (!simulation.shouldTerminate())
     {
         simulation.step();
         outPerIter.push_back(Parser::makeJson(simulation));
     }
-
+    std::cout << "Simulation Ended!" << std::endl; /// to remove
     // writing the outputs list to a file
     const string output_path = config_path.substr(0, config_path.find_last_of('.')) + ".out";
     std::ofstream outputFile(output_path);

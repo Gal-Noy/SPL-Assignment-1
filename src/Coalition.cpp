@@ -8,7 +8,7 @@ Coalition::Coalition(Agent &agent, vector<const Party *> _existingParties, int _
         mAgent(&agent),
         existingParties(std::move(_existingParties)),
         offeredParties(set<const Party*>{}), //
-        mandates(_mandates)
+        mandates(0)
 {
     // Implementation of constructor
 }
@@ -85,6 +85,10 @@ int Coalition::getMandates() const {
 void Coalition::addParty(Party *party) {
     existingParties.push_back(party);
     mandates += party->getMandates();
+}
+
+const vector<const Party *> &Coalition::getExistingParties() const{
+    return existingParties;
 }
 
 void Coalition::offerParty(const Party &party){

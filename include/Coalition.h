@@ -28,6 +28,8 @@ public:
 
     void addParty(Party *);
 
+    const vector<const Party *> &getExistingParties() const;
+
     void offerParty(const Party &);
 
     const set<const Party *> &getOfferedParties() const;
