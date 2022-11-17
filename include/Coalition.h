@@ -26,7 +26,13 @@ public:
 
     int getMandates() const;
 
+<<<<<<< HEAD
+    void addParty(Party *);
+=======
+    void addMandates(int toAdd);
+
     void addParty(const Party &, int mandates);
+>>>>>>> parent of d3f5035... success
 
     void offerParty(const Party &);
 
@@ -38,4 +44,5 @@ private:
     set<const Party *> offeredParties;
     int mandates;
 };
+
 

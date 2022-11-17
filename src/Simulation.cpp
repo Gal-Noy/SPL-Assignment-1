@@ -1,16 +1,20 @@
 #include "Simulation.h"
 
+#include <utility>
+
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(graph)), mAgents(agents) {
 
     for (Agent agent: agents) {
         int mandates = getParty(agent.getPartyId()).getMandates();
-        Coalition &coalition = agent.getCoalition();
-        const Party &party = getParty(agent.getPartyId());
+        const Party *party = &getParty(agent.getPartyId());
         agent.setCoalition(new Coalition(agent, vector<const Party *>{}, mandates));
-//        coalition.addParty(party, mandates);
+<<<<<<< HEAD
+        Coalition &coalition = agent.getCoalition();
+        coalition.addParty(const_cast<Party *>(party));
+=======
+        coalition.addParty(party, mandates);
+>>>>>>> parent of d3f5035... success
     }
-
-
 }
 
 void Simulation::step() {

@@ -5,12 +5,12 @@
 #include "Agent.h"
 
 Coalition::Coalition(Agent &agent, vector<const Party *> _existingParties, int _mandates) :
-        mAgent(&agent),
-        existingParties(std::move(_existingParties)),
-        offeredParties(set<const Party*>{}), //
-        mandates(_mandates)
+mAgent(&agent),
+existingParties(std::move(_existingParties)),
+offeredParties(set<const Party*>{}), //
+mandates(_mandates)
 {
-    // Implementation of constructor
+ // Implementation of constructor
 }
 
 Coalition::~Coalition() { // destructor
@@ -82,9 +82,19 @@ int Coalition::getMandates() const {
     return mandates;
 }
 
+<<<<<<< HEAD
+void Coalition::addParty(Party *party) {
+    existingParties.push_back(party);
+    mandates += party->getMandates();
+=======
+void Coalition::addMandates(int toAdd) {
+    mandates += toAdd;
+}
+
 void Coalition::addParty(const Party &party, int partyMandates) {
     existingParties.push_back(&party);
-    mandates += partyMandates;
+    addMandates(partyMandates);
+>>>>>>> parent of d3f5035... success
 }
 
 void Coalition::offerParty(const Party &party){
@@ -93,3 +103,4 @@ void Coalition::offerParty(const Party &party){
 const set<const Party*> &Coalition::getOfferedParties() const{
     return offeredParties;
 }
+
