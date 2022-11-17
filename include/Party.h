@@ -21,11 +21,11 @@ class Party
 {
 public:
     Party(int id, string name, int mandates, JoinPolicy *);
-    virtual ~Party(); // destructor
-    Party(const Party &other); // copy constructor
-    Party(Party &&other); // move constructor
-    Party &operator=(const Party &other); // copy assignment operator
-    Party &operator=(Party &&other); // move assignment operator
+//    virtual ~Party(); // destructor
+//    Party(const Party &other); // copy constructor
+//    Party(Party &&other); // move constructor
+//    Party &operator=(const Party &other); // copy assignment operator
+//    Party &operator=(Party &&other); // move assignment operator
 
     State getState() const;
     void setState(State state);
@@ -35,7 +35,7 @@ public:
 
     int getId() const;
     void changeCooldown();
-    void addOffer(Coalition &coalition);
+    void addOffer(Coalition *coalition);
     const vector<Coalition*> &getOffers() const;
 
 private:

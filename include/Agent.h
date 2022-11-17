@@ -8,15 +8,15 @@
 class Agent {
 public:
     Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy);
-    virtual ~Agent(); // destructor
-    Agent(const Agent &other); // copy constructor
-    Agent(Agent &&other); // move constructor
-    Agent &operator=(const Agent &other); // copy assignment operator
-    Agent &operator=(Agent &&other); // move assignment operator
+//    virtual ~Agent(); // destructor
+//    Agent(const Agent &other); // copy constructor
+//    Agent(Agent &&other); // move constructor
+//    Agent &operator=(const Agent &other); // copy assignment operator
+//    Agent &operator=(Agent &&other); // move assignment operator
 
     int getId() const;
 
-    Coalition &getCoalition() const;
+    Coalition *getCoalition() const;
 
     void setCoalition(Coalition *);
 
