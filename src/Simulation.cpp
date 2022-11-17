@@ -12,6 +12,12 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(gra
         std::cout << "coalition of agent number " << coalition.getAgent().getId() << " with party number " << coalition.getAgent().getPartyId()<< " with "
                   << coalition.getMandates() << " mandates" << std::endl; // to remove
     }
+
+    for (Agent &agent : agents){
+        std::cout << "agent is " << &agent << std::endl;
+        std::cout << "col is " << &(agent.getCoalition()) << std::endl;
+        std::cout << "party is " << &(getParty(agent.getPartyId())) << std::endl;
+    }
 }
 
 void Simulation::step() {
@@ -67,7 +73,12 @@ const vector<vector<int>> Simulation::getPartiesByCoalitions() const {
 
     // Create a table to map each party to its coalition
     std::map<Coalition *, vector<int>> map;
+    std::cout << "..." << std::endl;
     for (const Agent &agent: getAgents()) {
+        std::cout << "agent is " << &agent << std::endl;
+        std::cout << "col is " << &(agent.getCoalition()) << std::endl;
+        std::cout << "party is " << &(getParty(agent.getPartyId())) << std::endl;
+
         Coalition *agentCoalition = &agent.getCoalition();
 //        std::cout << "agent number " << agent.getId() << std::endl; // to remove
         if (map.find(agentCoalition) == map.end())
