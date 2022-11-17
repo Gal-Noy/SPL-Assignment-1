@@ -16,7 +16,7 @@ public:
 
     int getId() const;
 
-    Coalition *getCoalition() const;
+    Coalition &getCoalition() const;
 
     void setCoalition(Coalition *);
 

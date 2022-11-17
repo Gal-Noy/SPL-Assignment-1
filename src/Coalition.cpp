@@ -3,10 +3,9 @@
 #include "Coalition.h"
 #include "Party.h"
 #include "Agent.h"
-#include <iostream>
 
-Coalition::Coalition(Agent *agent, vector<const Party *> _existingParties) :
-        mAgent(agent),
+Coalition::Coalition(Agent &agent, vector<const Party *> _existingParties, int _mandates) :
+        mAgent(&agent),
         existingParties(std::move(_existingParties)),
         offeredParties(set<const Party*>{}), //
         mandates(0)
@@ -83,7 +82,7 @@ int Coalition::getMandates() const {
     return mandates;
 }
 
-void Coalition::addParty(const Party *party) {
+void Coalition::addParty(Party *party) {
     existingParties.push_back(party);
     mandates += party->getMandates();
 }

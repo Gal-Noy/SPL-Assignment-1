@@ -35,7 +35,7 @@ public:
 
     int getId() const;
     void changeCooldown();
-    void addOffer(Coalition *coalition);
+    void addOffer(Coalition &coalition);
     const vector<Coalition*> &getOffers() const;
 
 private:

@@ -13,7 +13,7 @@ using std::vector;
 
 class Coalition {
 public:
-    Coalition(Agent *agent, vector<const Party *> existingParties);
+    Coalition(Agent &agent, vector<const Party *> existingParties, int mandates);
     virtual ~Coalition(); // destructor
     Coalition(const Coalition &other); // copy constructor
     Coalition(Coalition &&other); // move constructor
@@ -26,7 +26,7 @@ public:
 
     int getMandates() const;
 
-    void addParty(const Party *);
+    void addParty(Party *);
 
     const vector<const Party *> &getExistingParties() const;
 

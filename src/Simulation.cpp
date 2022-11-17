@@ -3,13 +3,14 @@
 
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(graph)), mAgents(agents) {
 
-    for (int i = 0; i < agents.size(); i++) {
-        Agent &agent = agents[i];
+    for (Agent &agent: agents) {
+        int mandates = getParty(agent.getPartyId()).getMandates();
         const Party *party = &getParty(agent.getPartyId());
-        Coalition *agentCoalition = agent.getCoalition();
-        agentCoalition->addParty(party);
-        std::cout << "coalition of agent number " << agentCoalition->getAgent().getId() << " with party number " << agentCoalition->getAgent().getPartyId() << " with "
-                  << agentCoalition->getMandates() << " mandates, at address " << &agentCoalition << std::endl; // to remove
+        agent.setCoalition(new Coalition(agent, vector<const Party *>{}, mandates));
+        Coalition &coalition = agent.getCoalition();
+        coalition.addParty(const_cast<Party *>(party));
+        std::cout << "coalition of agent number " << coalition.getAgent().getId() << " with party number " << coalition.getAgent().getPartyId()<< " with "
+                  << coalition.getMandates() << " mandates" << std::endl; // to remove
     }
 }
 
@@ -67,7 +68,7 @@ const vector<vector<int>> Simulation::getPartiesByCoalitions() const {
     // Create a table to map each party to its coalition
     std::map<Coalition *, vector<int>> map;
     for (const Agent &agent: getAgents()) {
-        Coalition *agentCoalition = agent.getCoalition();
+        Coalition *agentCoalition = &agent.getCoalition();
 //        std::cout << "agent number " << agent.getId() << std::endl; // to remove
         if (map.find(agentCoalition) == map.end())
             map[agentCoalition] = vector<int>();
@@ -91,6 +92,6 @@ const vector<vector<int>> Simulation::getPartiesByCoalitions() const {
 
 void Simulation::cloneAgent(const Agent &agent, int partyId) {
     auto *toAdd = new Agent((int) mAgents.size(), partyId, agent.getSelectionPolicy());
-    toAdd->setCoalition(agent.getCoalition());
+    toAdd->setCoalition(&agent.getCoalition());
     mAgents.push_back(*toAdd);
 }

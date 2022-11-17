@@ -115,8 +115,8 @@ void Party::step(Simulation &s) {
     setState(Joined);
 }
 
-void Party::addOffer(Coalition *coalition) {
-    offers.push_back(coalition);
+void Party::addOffer(Coalition &coalition) {
+    offers.push_back(&coalition);
 }
 
 const vector<Coalition *> &Party::getOffers() const {
