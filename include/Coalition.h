@@ -26,7 +26,7 @@ public:
 
     int getMandates() const;
 
-    void addParty(const Party &, int mandates);
+    void addParty(Party *);
 
     void offerParty(const Party &);
 

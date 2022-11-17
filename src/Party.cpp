@@ -109,8 +109,7 @@ void Party::step(Simulation &s) {
         return;
     }
     Coalition *toJoin = mJoinPolicy->choose(offers);
-    const Party &self = *this;
-    toJoin->addParty(self, this->getMandates());
+    toJoin->addParty(this);
     s.cloneAgent(toJoin->getAgent(), mId);
 
     setState(Joined);

@@ -4,13 +4,11 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(gra
 
     for (Agent agent: agents) {
         int mandates = getParty(agent.getPartyId()).getMandates();
-        Coalition &coalition = agent.getCoalition();
-        const Party &party = getParty(agent.getPartyId());
+        const Party *party = &getParty(agent.getPartyId());
         agent.setCoalition(new Coalition(agent, vector<const Party *>{}, mandates));
-//        coalition.addParty(party, mandates);
+        Coalition &coalition = agent.getCoalition();
+        coalition.addParty(const_cast<Party *>(party));
     }
-
-
 }
 
 void Simulation::step() {

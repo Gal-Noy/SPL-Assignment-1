@@ -82,9 +82,9 @@ int Coalition::getMandates() const {
     return mandates;
 }
 
-void Coalition::addParty(const Party &party, int partyMandates) {
-    existingParties.push_back(&party);
-    mandates += partyMandates;
+void Coalition::addParty(Party *party) {
+    existingParties.push_back(party);
+    mandates += party->getMandates();
 }
 
 void Coalition::offerParty(const Party &party){
