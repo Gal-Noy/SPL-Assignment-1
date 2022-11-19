@@ -17,7 +17,8 @@ Party::~Party() { // destructor
 //    for (Coalition * coalition : offers){
 //        delete coalition;
 //    }
-    offers.clear();
+//    offers.clear();
+    std::cout << "PPPPPPPPPPPPPPPPPPPPPP" << std::endl;
 }
 
 Party::Party(const Party &other) { // copy constructor
@@ -40,9 +41,6 @@ Party::Party(Party &&other) { // move constructor
     other.mJoinPolicy = nullptr;
 
     offers = std::move(other.offers);
-//    for (Coalition * coalition : offers){
-//        delete coalition;
-//    }
 }
 
 Party &Party::operator=(const Party &other) { // copy assignment operator
@@ -104,13 +102,13 @@ void Party::step(Simulation &s) {
     /// Debug
     std::cout << "party's offers are:" << std::endl;
     for (Coalition * col : offers){
-        std::cout << col->getAgent()->getId() << std::endl;
+        std::cout << col->getAgent().getId() << std::endl;
     }
 
     Coalition *toJoin = offers[mJoinPolicy->choose(offers)];
-    std::cout << "party " << mId << " chose coalition " << toJoin->getAgent()->getId() << std::endl;
-    toJoin->addParty(this);
-    s.cloneAgent(const_cast<Agent *>(toJoin->getAgent()), mId);
+    std::cout << "party " << mId << " chose coalition " << toJoin->getAgent().getId() << std::endl;
+    toJoin->addParty(*this);
+    s.cloneAgent(toJoin->getAgent(), mId);
     setState(Joined);
 
     std::cout << "ended step party " << mId << std::endl;

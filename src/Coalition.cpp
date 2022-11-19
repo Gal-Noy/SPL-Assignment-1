@@ -5,7 +5,7 @@
 #include "Party.h"
 #include "Agent.h"
 
-Coalition::Coalition(Agent *agent, vector<const Party *> _existingParties) :
+Coalition::Coalition(Agent *agent, vector<Party *> _existingParties) :
         mAgent(agent),
         existingParties(std::move(_existingParties)),
         offeredParties(set<const Party*>{}), //
@@ -15,9 +15,9 @@ Coalition::Coalition(Agent *agent, vector<const Party *> _existingParties) :
 }
 
 Coalition::~Coalition() { // destructor
-    if (mAgent) delete mAgent;
+//    if (mAgent) delete mAgent;
 
-    for (const Party * party : existingParties){
+    for (Party * party : existingParties){
         delete party;
     }
     existingParties.clear();
@@ -26,12 +26,14 @@ Coalition::~Coalition() { // destructor
         delete party;
     }
     offeredParties.clear();
+
+    std::cout << "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC" << std::endl;
 }
 
 Coalition::Coalition(const Coalition &other){ // copy constructor
     mandates = other.mandates;
     mAgent = new Agent(*other.mAgent);
-    existingParties = vector<const Party *>(other.existingParties);
+    existingParties = vector<Party *>(other.existingParties);
     offeredParties = set<const Party *>(other.offeredParties);
 }
 
@@ -85,22 +87,18 @@ Coalition &Coalition::operator=(Coalition &&other){ // move assignment operator
     return *this;
 }
 
-Agent *Coalition::getAgent(){
-    return mAgent;
+Agent &Coalition::getAgent(){
+    return *mAgent;
 }
 
 int Coalition::getMandates() const {
     return mandates;
 }
 
-void Coalition::addParty(const Party *party) {
-    existingParties.push_back(party);
-    mandates += party->getMandates();
-    std::cout << "coalition " << getAgent()->getId() << " added party " << party->getId() << " and its mandates amount is " << mandates << std::endl;
-}
-
-const vector<const Party *> &Coalition::getExistingParties() const{
-    return existingParties;
+void Coalition::addParty(Party &party) {
+    existingParties.push_back(&party);
+    mandates += party.getMandates();
+    std::cout << "coalition " << getAgent().getId() << " added party " << party.getId() << " and its mandates amount is " << mandates << std::endl;
 }
 
 void Coalition::offerParty(const Party *party){

@@ -7,9 +7,9 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(gra
     mAgents.reserve(mGraph.getNumVertices());
 
     for (Agent &agent: mAgents) {
-        agent.setCoalition(new Coalition(&agent, vector<const Party *>{}));
-        const Party *party = &getParty(agent.getPartyId());
-        Coalition *agentCoalition = agent.getCoalition();
+        Coalition *agentCoalition = new Coalition(&agent, vector<Party *>{});
+        agent.setCoalition(agentCoalition);
+        auto &party = const_cast<Party &>(getParty(agent.getPartyId()));
         agentCoalition->addParty(party);
     }
     vector<Party> &parties = mGraph.getParties();
@@ -20,8 +20,8 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(gra
         std::cout << "agent is " << &agent << std::endl;
         std::cout << "col is " << agent.getCoalition() << std::endl;
         std::cout << "party is " << &(getParty(agent.getPartyId())) << std::endl;
-        std::cout << "coalition of agent number " << agent.getCoalition()->getAgent()->getId() << " with party number "
-                  << agent.getCoalition()->getAgent()->getPartyId() << " with "
+        std::cout << "coalition of agent number " << agent.getCoalition()->getAgent().getId() << " with party number "
+                  << agent.getCoalition()->getAgent().getPartyId() << " with "
                   << agent.getCoalition()->getMandates() << " mandates" << std::endl; // to remove
     }
 }
@@ -115,16 +115,17 @@ const vector<vector<int>> Simulation::getPartiesByCoalitions() const {
     return ans;
 }
 
-void Simulation::cloneAgent(Agent *agentToClone, int partyId) {
-    Agent toAdd((int) mAgents.size(), partyId, agentToClone->getSelectionPolicy());
-    toAdd.setCoalition(agentToClone->getCoalition());
-    mAgents.push_back(toAdd);
-    std::cout << "a new agent is added of id " << toAdd.getId() << ", with coalition "
-              << toAdd.getCoalition()->getAgent()->getId() << " and with party " << toAdd.getPartyId() << std::endl;
+void Simulation::cloneAgent(Agent &agentToClone, int partyId) {
+    Agent *toAdd = new Agent((int) mAgents.size(), partyId, agentToClone.getSelectionPolicy());
+    toAdd->setCoalition(agentToClone.getCoalition());
+    mAgents.push_back(*toAdd);
+
+    std::cout << "a new agent is added of id " << toAdd->getId() << ", with coalition "
+              << toAdd->getCoalition()->getAgent().getId() << " and with party " << toAdd->getPartyId() << std::endl;
 
     //Debug::
     std::cout << "checking after clone:" << std::endl;
     for (Agent &agent : mAgents)
-        std::cout << "agent " << agent.getId() << " is of col " << agent.getCoalition()->getAgent()->getId() << std::endl;
+        std::cout << "agent " << agent.getId() << " is of col " << agent.getCoalition()->getAgent().getId() << std::endl;
 
 }

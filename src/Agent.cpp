@@ -6,13 +6,16 @@ Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgen
                                                                            mSelectionPolicy(selectionPolicy) {
 }
 
-Agent::~Agent() {} // destructor
+Agent::~Agent() { // destructor
+//    if (mCoalition) delete mCoalition;
+    std::cout << "AAAAAAAAAAAAAAAAAAAAAAAAAA" << std::endl;
+}
 
 Agent::Agent(const Agent &other) { // copy constructor
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId;
-
     mCoalition = other.mCoalition;
+//    mCoalition = new Coalition(*other.mCoalition);
     mSelectionPolicy = other.mSelectionPolicy;
 }
 
@@ -102,7 +105,7 @@ void Agent::step(Simulation &sim) {
         selectedParty->addOffer(agentCoalition);
         if (selectedParty->getState() == Waiting)
             selectedParty->setState(CollectingOffers);
-        std::cout << "agent " << mAgentId << " of coalition " << getCoalition()->getAgent()->getId() << " offered party " << selectedParty->getId() << std::endl;
+        std::cout << "agent " << mAgentId << " of coalition " << getCoalition()->getAgent().getId() << " offered party " << selectedParty->getId() << std::endl;
     }
 
     std::cout << "ended step agent " << mAgentId << std::endl;
