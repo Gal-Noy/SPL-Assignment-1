@@ -117,12 +117,12 @@ const vector<vector<int>> Simulation::getPartiesByCoalitions() const {
 
 void Simulation::cloneAgent(int agentId, int partyId) {
     Agent &agentToClone = mAgents[agentId];
-    Agent *toAdd = new Agent((int) mAgents.size(), partyId, agentToClone.getSelectionPolicy());
-    toAdd->setCoalition(agentToClone.getCoalition());
-    mAgents.push_back(*toAdd);
+    Agent toAdd((int) mAgents.size(), partyId, agentToClone.getSelectionPolicy());
+    toAdd.setCoalition(agentToClone.getCoalition());
+    mAgents.push_back(toAdd);
 
-    std::cout << "a new agent is added of id " << toAdd->getId() << ", with coalition "
-              << toAdd->getCoalition()->getAgentId() << " and with party " << toAdd->getPartyId() << std::endl;
+    std::cout << "a new agent is added of id " << toAdd.getId() << ", with coalition "
+              << toAdd.getCoalition()->getAgentId() << " and with party " << toAdd.getPartyId() << std::endl;
 
     //Debug::
     std::cout << "checking after clone:" << std::endl;

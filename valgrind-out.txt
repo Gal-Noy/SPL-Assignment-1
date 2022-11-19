@@ -1,205 +1,205 @@
-==5748== Memcheck, a memory error detector
-==5748== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==5748== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==5748== Command: bin/cRace tests/01.json
-==5748== Parent PID: 1817
-==5748== 
---5748-- 
---5748-- Valgrind options:
---5748--    --leak-check=full
---5748--    --show-leak-kinds=all
---5748--    --track-origins=yes
---5748--    --verbose
---5748--    --log-file=valgrind-out.txt
---5748-- Contents of /proc/version:
---5748--   Linux version 4.15.0-197-generic (buildd@lcy02-amd64-110) (gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04)) #208-Ubuntu SMP Tue Nov 1 17:23:37 UTC 2022
---5748-- 
---5748-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3
---5748-- Page sizes: currently 4096, max supported 4096
---5748-- Valgrind library directory: /usr/lib/valgrind
---5748-- Reading syms from /home/spl211/Desktop/SPL-Assignment1/bin/cRace
---5748-- Reading syms from /lib/x86_64-linux-gnu/ld-2.27.so
---5748--   Considering /lib/x86_64-linux-gnu/ld-2.27.so ..
---5748--   .. CRC mismatch (computed 385b96e8 wanted 9d917e0b)
---5748--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.27.so ..
---5748--   .. CRC is valid
---5748-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
---5748--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
---5748--   .. CRC mismatch (computed 62965bbf wanted eeb84137)
---5748--    object doesn't have a symbol table
---5748--    object doesn't have a dynamic symbol table
---5748-- Scheduler: using generic scheduler lock implementation.
---5748-- Reading suppressions file: /usr/lib/valgrind/default.supp
-==5748== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-5748-by-spl211-on-???
-==5748== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-5748-by-spl211-on-???
-==5748== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-5748-by-spl211-on-???
-==5748== 
-==5748== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==5748== don't want to do, unless you know exactly what you're doing,
-==5748== or are doing some strange experiment):
-==5748==   /usr/lib/valgrind/../../bin/vgdb --pid=5748 ...command...
-==5748== 
-==5748== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==5748==   /path/to/gdb bin/cRace
-==5748== and then give GDB the following command
-==5748==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=5748
-==5748== --pid is optional if only one valgrind process is running
-==5748== 
---5748-- REDIR: 0x4020d20 (ld-linux-x86-64.so.2:strlen) redirected to 0x58060901 (???)
---5748-- REDIR: 0x4020b00 (ld-linux-x86-64.so.2:index) redirected to 0x5806091b (???)
---5748-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
---5748--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
---5748--   .. CRC mismatch (computed 13d5e98a wanted 1786ecf1)
---5748--    object doesn't have a symbol table
---5748-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
---5748--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
---5748--   .. CRC mismatch (computed 8f77ef36 wanted fcbde737)
---5748--    object doesn't have a symbol table
-==5748== WARNING: new redirection conflicts with existing -- ignoring it
---5748--     old: 0x04020d20 (strlen              ) R-> (0000.0) 0x58060901 ???
---5748--     new: 0x04020d20 (strlen              ) R-> (2007.0) 0x04c34db0 strlen
---5748-- REDIR: 0x401d540 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c35ee0 (strcmp)
---5748-- REDIR: 0x4021260 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c394f0 (mempcpy)
---5748-- Reading syms from /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25
---5748--    object doesn't have a symbol table
---5748-- Reading syms from /lib/x86_64-linux-gnu/libgcc_s.so.1
---5748--    object doesn't have a symbol table
---5748-- Reading syms from /lib/x86_64-linux-gnu/libc-2.27.so
---5748--   Considering /lib/x86_64-linux-gnu/libc-2.27.so ..
---5748--   .. CRC mismatch (computed 8c0be908 wanted 7c906570)
---5748--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.27.so ..
---5748--   .. CRC is valid
---5748-- Reading syms from /lib/x86_64-linux-gnu/libm-2.27.so
---5748--   Considering /lib/x86_64-linux-gnu/libm-2.27.so ..
---5748--   .. CRC mismatch (computed 0fef35ac wanted 26ea9025)
---5748--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libm-2.27.so ..
---5748--   .. CRC is valid
---5748-- REDIR: 0x547da50 (libc.so.6:memmove) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547cd60 (libc.so.6:strncpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547dd30 (libc.so.6:strcasecmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547c7b0 (libc.so.6:strcat) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547cd90 (libc.so.6:rindex) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547f480 (libc.so.6:rawmemchr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547dbc0 (libc.so.6:mempcpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547d9f0 (libc.so.6:bcmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547cd20 (libc.so.6:strncmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547c820 (libc.so.6:strcmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547db20 (libc.so.6:memset) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x549adb0 (libc.so.6:wcschr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547ccc0 (libc.so.6:strnlen) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547c890 (libc.so.6:strcspn) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547dd80 (libc.so.6:strncasecmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547c860 (libc.so.6:strcpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547dec0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547cdc0 (libc.so.6:strpbrk) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547c7e0 (libc.so.6:index) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547cc90 (libc.so.6:strlen) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x5487380 (libc.so.6:memrchr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547ddd0 (libc.so.6:strcasecmp_l) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547d9c0 (libc.so.6:memchr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x549bb70 (libc.so.6:wcslen) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547d070 (libc.so.6:strspn) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547dd00 (libc.so.6:stpncpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547dcd0 (libc.so.6:stpcpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547f4b0 (libc.so.6:strchrnul) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x547de20 (libc.so.6:strncasecmp_l) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
---5748-- REDIR: 0x548fff0 (libc.so.6:__strrchr_sse2) redirected to 0x4c34790 (__strrchr_sse2)
---5748-- REDIR: 0x5476020 (libc.so.6:malloc) redirected to 0x4c31aa0 (malloc)
---5748-- REDIR: 0x54902e0 (libc.so.6:__strlen_sse2) redirected to 0x4c34d30 (__strlen_sse2)
---5748-- REDIR: 0x556ee80 (libc.so.6:__memcmp_sse4_1) redirected to 0x4c37d50 (__memcmp_sse4_1)
---5748-- REDIR: 0x5488b30 (libc.so.6:__strcmp_sse2_unaligned) redirected to 0x4c35da0 (strcmp)
---5748-- REDIR: 0x549a120 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4c36060 (memcpy@GLIBC_2.2.5)
---5748-- REDIR: 0x547d5a0 (libc.so.6:__GI_strstr) redirected to 0x4c39760 (__strstr_sse2)
---5748-- REDIR: 0x4ed1330 (libstdc++.so.6:operator new[](unsigned long)) redirected to 0x4c32830 (operator new[](unsigned long))
---5748-- REDIR: 0x4ed1280 (libstdc++.so.6:operator new(unsigned long)) redirected to 0x4c32110 (operator new(unsigned long))
---5748-- REDIR: 0x4ecf390 (libstdc++.so.6:operator delete(void*)) redirected to 0x4c331d0 (operator delete(void*))
---5748-- REDIR: 0x549a100 (libc.so.6:__mempcpy_sse2_unaligned) redirected to 0x4c39130 (mempcpy)
---5748-- REDIR: 0x4ecf3c0 (libstdc++.so.6:operator delete[](void*)) redirected to 0x4c336d0 (operator delete[](void*))
---5748-- REDIR: 0x5476910 (libc.so.6:free) redirected to 0x4c32cd0 (free)
---5748-- REDIR: 0x549a530 (libc.so.6:__memset_sse2_unaligned) redirected to 0x4c385d0 (memset)
-==5748== 
-==5748== HEAP SUMMARY:
-==5748==     in use at exit: 400 bytes in 13 blocks
-==5748==   total heap usage: 2,662 allocs, 2,649 frees, 256,409 bytes allocated
-==5748== 
-==5748== Searching for pointers to 13 not-freed blocks
-==5748== Checked 110,968 bytes
-==5748== 
-==5748== 8 bytes in 1 blocks are indirectly lost in loss record 1 of 7
-==5748==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==5748==    by 0x144EA5: __gnu_cxx::new_allocator<Party*>::allocate(unsigned long, void const*) (new_allocator.h:111)
-==5748==    by 0x14493F: std::allocator_traits<std::allocator<Party*> >::allocate(std::allocator<Party*>&, unsigned long) (alloc_traits.h:436)
-==5748==    by 0x143C4D: std::_Vector_base<Party*, std::allocator<Party*> >::_M_allocate(unsigned long) (stl_vector.h:172)
-==5748==    by 0x144051: void std::vector<Party*, std::allocator<Party*> >::_M_realloc_insert<Party*>(__gnu_cxx::__normal_iterator<Party**, std::vector<Party*, std::allocator<Party*> > >, Party*&&) (vector.tcc:406)
-==5748==    by 0x143601: void std::vector<Party*, std::allocator<Party*> >::emplace_back<Party*>(Party*&&) (vector.tcc:105)
-==5748==    by 0x142AED: std::vector<Party*, std::allocator<Party*> >::push_back(Party*&&) (stl_vector.h:954)
-==5748==    by 0x141DE6: Coalition::addParty(Party&) (Coalition.cpp:97)
-==5748==    by 0x13D0D1: Simulation::Simulation(Graph, std::vector<Agent, std::allocator<Agent> >) (Simulation.cpp:13)
-==5748==    by 0x11A82F: Parser::parseSimulation(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&) (Parser.cpp:101)
-==5748==    by 0x119CDA: Parser::readSimulation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Parser.cpp:9)
-==5748==    by 0x10C80C: main (main.cpp:19)
-==5748== 
-==5748== 16 bytes in 2 blocks are definitely lost in loss record 2 of 7
-==5748==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==5748==    by 0x119E42: Parser::parseAgent(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&, int) (Parser.cpp:19)
-==5748==    by 0x11A536: Parser::parseSimulation(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&) (Parser.cpp:80)
-==5748==    by 0x119CDA: Parser::readSimulation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Parser.cpp:9)
-==5748==    by 0x10C80C: main (main.cpp:19)
-==5748== 
-==5748== 16 bytes in 2 blocks are definitely lost in loss record 3 of 7
-==5748==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==5748==    by 0x119F91: Parser::parseParty(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&, int) (Parser.cpp:33)
-==5748==    by 0x11A5F3: Parser::parseSimulation(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&) (Parser.cpp:85)
-==5748==    by 0x119CDA: Parser::readSimulation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Parser.cpp:9)
-==5748==    by 0x10C80C: main (main.cpp:19)
-==5748== 
-==5748== 16 bytes in 2 blocks are definitely lost in loss record 4 of 7
-==5748==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==5748==    by 0x119FC6: Parser::parseParty(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&, int) (Parser.cpp:37)
-==5748==    by 0x11A5F3: Parser::parseSimulation(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&) (Parser.cpp:85)
-==5748==    by 0x119CDA: Parser::readSimulation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Parser.cpp:9)
-==5748==    by 0x10C80C: main (main.cpp:19)
-==5748== 
-==5748== 32 bytes in 1 blocks are indirectly lost in loss record 5 of 7
-==5748==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==5748==    by 0x144EA5: __gnu_cxx::new_allocator<Party*>::allocate(unsigned long, void const*) (new_allocator.h:111)
-==5748==    by 0x14493F: std::allocator_traits<std::allocator<Party*> >::allocate(std::allocator<Party*>&, unsigned long) (alloc_traits.h:436)
-==5748==    by 0x143C4D: std::_Vector_base<Party*, std::allocator<Party*> >::_M_allocate(unsigned long) (stl_vector.h:172)
-==5748==    by 0x144051: void std::vector<Party*, std::allocator<Party*> >::_M_realloc_insert<Party*>(__gnu_cxx::__normal_iterator<Party**, std::vector<Party*, std::allocator<Party*> > >, Party*&&) (vector.tcc:406)
-==5748==    by 0x143601: void std::vector<Party*, std::allocator<Party*> >::emplace_back<Party*>(Party*&&) (vector.tcc:105)
-==5748==    by 0x142AED: std::vector<Party*, std::allocator<Party*> >::push_back(Party*&&) (stl_vector.h:954)
-==5748==    by 0x141DE6: Coalition::addParty(Party&) (Coalition.cpp:97)
-==5748==    by 0x13B0E0: Party::step(Simulation&) (Party.cpp:110)
-==5748==    by 0x13D5DA: Simulation::step() (Simulation.cpp:44)
-==5748==    by 0x10C957: main (main.cpp:28)
-==5748== 
-==5748== 120 bytes in 3 blocks are indirectly lost in loss record 6 of 7
-==5748==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==5748==    by 0x145515: __gnu_cxx::new_allocator<std::_Rb_tree_node<Party const*> >::allocate(unsigned long, void const*) (new_allocator.h:111)
-==5748==    by 0x145437: std::allocator_traits<std::allocator<std::_Rb_tree_node<Party const*> > >::allocate(std::allocator<std::_Rb_tree_node<Party const*> >&, unsigned long) (alloc_traits.h:436)
-==5748==    by 0x145398: std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_M_get_node() (stl_tree.h:588)
-==5748==    by 0x145075: std::_Rb_tree_node<Party const*>* std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_M_create_node<Party const* const&>(Party const* const&) (stl_tree.h:642)
-==5748==    by 0x144D40: std::_Rb_tree_node<Party const*>* std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_Alloc_node::operator()<Party const* const&>(Party const* const&) const (stl_tree.h:556)
-==5748==    by 0x1444E9: std::_Rb_tree_iterator<Party const*> std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_M_insert_<Party const* const&, std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_Alloc_node>(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, Party const* const&, std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_Alloc_node&) (stl_tree.h:1753)
-==5748==    by 0x1436A2: std::pair<std::_Rb_tree_iterator<Party const*>, bool> std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_M_insert_unique<Party const* const&>(Party const* const&) (stl_tree.h:2096)
-==5748==    by 0x142B23: std::set<Party const*, std::less<Party const*>, std::allocator<Party const*> >::insert(Party const* const&) (stl_set.h:501)
-==5748==    by 0x141EDC: Coalition::offerParty(Party const*) (Coalition.cpp:103)
-==5748==    by 0x1180E0: Agent::step(Simulation&) (Agent.cpp:104)
-==5748==    by 0x13D64E: Simulation::step() (Simulation.cpp:50)
-==5748== 
-==5748== 352 (192 direct, 160 indirect) bytes in 2 blocks are definitely lost in loss record 7 of 7
-==5748==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==5748==    by 0x13D063: Simulation::Simulation(Graph, std::vector<Agent, std::allocator<Agent> >) (Simulation.cpp:10)
-==5748==    by 0x11A82F: Parser::parseSimulation(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&) (Parser.cpp:101)
-==5748==    by 0x119CDA: Parser::readSimulation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Parser.cpp:9)
-==5748==    by 0x10C80C: main (main.cpp:19)
-==5748== 
-==5748== LEAK SUMMARY:
-==5748==    definitely lost: 240 bytes in 8 blocks
-==5748==    indirectly lost: 160 bytes in 5 blocks
-==5748==      possibly lost: 0 bytes in 0 blocks
-==5748==    still reachable: 0 bytes in 0 blocks
-==5748==         suppressed: 0 bytes in 0 blocks
-==5748== 
-==5748== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
-==5748== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
+==7204== Memcheck, a memory error detector
+==7204== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==7204== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==7204== Command: bin/cRace tests/01.json
+==7204== Parent PID: 1817
+==7204== 
+--7204-- 
+--7204-- Valgrind options:
+--7204--    --leak-check=full
+--7204--    --show-leak-kinds=all
+--7204--    --track-origins=yes
+--7204--    --verbose
+--7204--    --log-file=valgrind-out.txt
+--7204-- Contents of /proc/version:
+--7204--   Linux version 4.15.0-197-generic (buildd@lcy02-amd64-110) (gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04)) #208-Ubuntu SMP Tue Nov 1 17:23:37 UTC 2022
+--7204-- 
+--7204-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3
+--7204-- Page sizes: currently 4096, max supported 4096
+--7204-- Valgrind library directory: /usr/lib/valgrind
+--7204-- Reading syms from /home/spl211/Desktop/SPL-Assignment1/bin/cRace
+--7204-- Reading syms from /lib/x86_64-linux-gnu/ld-2.27.so
+--7204--   Considering /lib/x86_64-linux-gnu/ld-2.27.so ..
+--7204--   .. CRC mismatch (computed 385b96e8 wanted 9d917e0b)
+--7204--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.27.so ..
+--7204--   .. CRC is valid
+--7204-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--7204--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--7204--   .. CRC mismatch (computed 62965bbf wanted eeb84137)
+--7204--    object doesn't have a symbol table
+--7204--    object doesn't have a dynamic symbol table
+--7204-- Scheduler: using generic scheduler lock implementation.
+--7204-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==7204== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-7204-by-spl211-on-???
+==7204== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-7204-by-spl211-on-???
+==7204== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-7204-by-spl211-on-???
+==7204== 
+==7204== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==7204== don't want to do, unless you know exactly what you're doing,
+==7204== or are doing some strange experiment):
+==7204==   /usr/lib/valgrind/../../bin/vgdb --pid=7204 ...command...
+==7204== 
+==7204== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==7204==   /path/to/gdb bin/cRace
+==7204== and then give GDB the following command
+==7204==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=7204
+==7204== --pid is optional if only one valgrind process is running
+==7204== 
+--7204-- REDIR: 0x4020d20 (ld-linux-x86-64.so.2:strlen) redirected to 0x58060901 (???)
+--7204-- REDIR: 0x4020b00 (ld-linux-x86-64.so.2:index) redirected to 0x5806091b (???)
+--7204-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--7204--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--7204--   .. CRC mismatch (computed 13d5e98a wanted 1786ecf1)
+--7204--    object doesn't have a symbol table
+--7204-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--7204--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--7204--   .. CRC mismatch (computed 8f77ef36 wanted fcbde737)
+--7204--    object doesn't have a symbol table
+==7204== WARNING: new redirection conflicts with existing -- ignoring it
+--7204--     old: 0x04020d20 (strlen              ) R-> (0000.0) 0x58060901 ???
+--7204--     new: 0x04020d20 (strlen              ) R-> (2007.0) 0x04c34db0 strlen
+--7204-- REDIR: 0x401d540 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c35ee0 (strcmp)
+--7204-- REDIR: 0x4021260 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c394f0 (mempcpy)
+--7204-- Reading syms from /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25
+--7204--    object doesn't have a symbol table
+--7204-- Reading syms from /lib/x86_64-linux-gnu/libgcc_s.so.1
+--7204--    object doesn't have a symbol table
+--7204-- Reading syms from /lib/x86_64-linux-gnu/libc-2.27.so
+--7204--   Considering /lib/x86_64-linux-gnu/libc-2.27.so ..
+--7204--   .. CRC mismatch (computed 8c0be908 wanted 7c906570)
+--7204--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.27.so ..
+--7204--   .. CRC is valid
+--7204-- Reading syms from /lib/x86_64-linux-gnu/libm-2.27.so
+--7204--   Considering /lib/x86_64-linux-gnu/libm-2.27.so ..
+--7204--   .. CRC mismatch (computed 0fef35ac wanted 26ea9025)
+--7204--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libm-2.27.so ..
+--7204--   .. CRC is valid
+--7204-- REDIR: 0x547da50 (libc.so.6:memmove) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547cd60 (libc.so.6:strncpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547dd30 (libc.so.6:strcasecmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547c7b0 (libc.so.6:strcat) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547cd90 (libc.so.6:rindex) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547f480 (libc.so.6:rawmemchr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547dbc0 (libc.so.6:mempcpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547d9f0 (libc.so.6:bcmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547cd20 (libc.so.6:strncmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547c820 (libc.so.6:strcmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547db20 (libc.so.6:memset) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x549adb0 (libc.so.6:wcschr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547ccc0 (libc.so.6:strnlen) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547c890 (libc.so.6:strcspn) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547dd80 (libc.so.6:strncasecmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547c860 (libc.so.6:strcpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547dec0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547cdc0 (libc.so.6:strpbrk) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547c7e0 (libc.so.6:index) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547cc90 (libc.so.6:strlen) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x5487380 (libc.so.6:memrchr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547ddd0 (libc.so.6:strcasecmp_l) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547d9c0 (libc.so.6:memchr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x549bb70 (libc.so.6:wcslen) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547d070 (libc.so.6:strspn) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547dd00 (libc.so.6:stpncpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547dcd0 (libc.so.6:stpcpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547f4b0 (libc.so.6:strchrnul) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x547de20 (libc.so.6:strncasecmp_l) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--7204-- REDIR: 0x548fff0 (libc.so.6:__strrchr_sse2) redirected to 0x4c34790 (__strrchr_sse2)
+--7204-- REDIR: 0x5476020 (libc.so.6:malloc) redirected to 0x4c31aa0 (malloc)
+--7204-- REDIR: 0x54902e0 (libc.so.6:__strlen_sse2) redirected to 0x4c34d30 (__strlen_sse2)
+--7204-- REDIR: 0x556ee80 (libc.so.6:__memcmp_sse4_1) redirected to 0x4c37d50 (__memcmp_sse4_1)
+--7204-- REDIR: 0x5488b30 (libc.so.6:__strcmp_sse2_unaligned) redirected to 0x4c35da0 (strcmp)
+--7204-- REDIR: 0x549a120 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4c36060 (memcpy@GLIBC_2.2.5)
+--7204-- REDIR: 0x547d5a0 (libc.so.6:__GI_strstr) redirected to 0x4c39760 (__strstr_sse2)
+--7204-- REDIR: 0x4ed1330 (libstdc++.so.6:operator new[](unsigned long)) redirected to 0x4c32830 (operator new[](unsigned long))
+--7204-- REDIR: 0x4ed1280 (libstdc++.so.6:operator new(unsigned long)) redirected to 0x4c32110 (operator new(unsigned long))
+--7204-- REDIR: 0x4ecf390 (libstdc++.so.6:operator delete(void*)) redirected to 0x4c331d0 (operator delete(void*))
+--7204-- REDIR: 0x549a100 (libc.so.6:__mempcpy_sse2_unaligned) redirected to 0x4c39130 (mempcpy)
+--7204-- REDIR: 0x4ecf3c0 (libstdc++.so.6:operator delete[](void*)) redirected to 0x4c336d0 (operator delete[](void*))
+--7204-- REDIR: 0x5476910 (libc.so.6:free) redirected to 0x4c32cd0 (free)
+--7204-- REDIR: 0x549a530 (libc.so.6:__memset_sse2_unaligned) redirected to 0x4c385d0 (memset)
+==7204== 
+==7204== HEAP SUMMARY:
+==7204==     in use at exit: 400 bytes in 13 blocks
+==7204==   total heap usage: 2,662 allocs, 2,649 frees, 256,409 bytes allocated
+==7204== 
+==7204== Searching for pointers to 13 not-freed blocks
+==7204== Checked 110,968 bytes
+==7204== 
+==7204== 8 bytes in 1 blocks are indirectly lost in loss record 1 of 7
+==7204==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7204==    by 0x144DF9: __gnu_cxx::new_allocator<Party*>::allocate(unsigned long, void const*) (new_allocator.h:111)
+==7204==    by 0x144893: std::allocator_traits<std::allocator<Party*> >::allocate(std::allocator<Party*>&, unsigned long) (alloc_traits.h:436)
+==7204==    by 0x143BA1: std::_Vector_base<Party*, std::allocator<Party*> >::_M_allocate(unsigned long) (stl_vector.h:172)
+==7204==    by 0x143FA5: void std::vector<Party*, std::allocator<Party*> >::_M_realloc_insert<Party*>(__gnu_cxx::__normal_iterator<Party**, std::vector<Party*, std::allocator<Party*> > >, Party*&&) (vector.tcc:406)
+==7204==    by 0x143555: void std::vector<Party*, std::allocator<Party*> >::emplace_back<Party*>(Party*&&) (vector.tcc:105)
+==7204==    by 0x142A41: std::vector<Party*, std::allocator<Party*> >::push_back(Party*&&) (stl_vector.h:954)
+==7204==    by 0x141D48: Coalition::addParty(Party&) (Coalition.cpp:93)
+==7204==    by 0x13D0BB: Simulation::Simulation(Graph, std::vector<Agent, std::allocator<Agent> >) (Simulation.cpp:13)
+==7204==    by 0x11A827: Parser::parseSimulation(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&) (Parser.cpp:101)
+==7204==    by 0x119CD2: Parser::readSimulation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Parser.cpp:9)
+==7204==    by 0x10C80C: main (main.cpp:19)
+==7204== 
+==7204== 16 bytes in 2 blocks are definitely lost in loss record 2 of 7
+==7204==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7204==    by 0x119E3A: Parser::parseAgent(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&, int) (Parser.cpp:19)
+==7204==    by 0x11A52E: Parser::parseSimulation(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&) (Parser.cpp:80)
+==7204==    by 0x119CD2: Parser::readSimulation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Parser.cpp:9)
+==7204==    by 0x10C80C: main (main.cpp:19)
+==7204== 
+==7204== 16 bytes in 2 blocks are definitely lost in loss record 3 of 7
+==7204==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7204==    by 0x119F89: Parser::parseParty(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&, int) (Parser.cpp:33)
+==7204==    by 0x11A5EB: Parser::parseSimulation(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&) (Parser.cpp:85)
+==7204==    by 0x119CD2: Parser::readSimulation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Parser.cpp:9)
+==7204==    by 0x10C80C: main (main.cpp:19)
+==7204== 
+==7204== 16 bytes in 2 blocks are definitely lost in loss record 4 of 7
+==7204==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7204==    by 0x119FBE: Parser::parseParty(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&, int) (Parser.cpp:37)
+==7204==    by 0x11A5EB: Parser::parseSimulation(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&) (Parser.cpp:85)
+==7204==    by 0x119CD2: Parser::readSimulation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Parser.cpp:9)
+==7204==    by 0x10C80C: main (main.cpp:19)
+==7204== 
+==7204== 32 bytes in 1 blocks are indirectly lost in loss record 5 of 7
+==7204==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7204==    by 0x144DF9: __gnu_cxx::new_allocator<Party*>::allocate(unsigned long, void const*) (new_allocator.h:111)
+==7204==    by 0x144893: std::allocator_traits<std::allocator<Party*> >::allocate(std::allocator<Party*>&, unsigned long) (alloc_traits.h:436)
+==7204==    by 0x143BA1: std::_Vector_base<Party*, std::allocator<Party*> >::_M_allocate(unsigned long) (stl_vector.h:172)
+==7204==    by 0x143FA5: void std::vector<Party*, std::allocator<Party*> >::_M_realloc_insert<Party*>(__gnu_cxx::__normal_iterator<Party**, std::vector<Party*, std::allocator<Party*> > >, Party*&&) (vector.tcc:406)
+==7204==    by 0x143555: void std::vector<Party*, std::allocator<Party*> >::emplace_back<Party*>(Party*&&) (vector.tcc:105)
+==7204==    by 0x142A41: std::vector<Party*, std::allocator<Party*> >::push_back(Party*&&) (stl_vector.h:954)
+==7204==    by 0x141D48: Coalition::addParty(Party&) (Coalition.cpp:93)
+==7204==    by 0x13B0B8: Party::step(Simulation&) (Party.cpp:110)
+==7204==    by 0x13D5B8: Simulation::step() (Simulation.cpp:44)
+==7204==    by 0x10C957: main (main.cpp:28)
+==7204== 
+==7204== 120 bytes in 3 blocks are indirectly lost in loss record 6 of 7
+==7204==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7204==    by 0x145469: __gnu_cxx::new_allocator<std::_Rb_tree_node<Party const*> >::allocate(unsigned long, void const*) (new_allocator.h:111)
+==7204==    by 0x14538B: std::allocator_traits<std::allocator<std::_Rb_tree_node<Party const*> > >::allocate(std::allocator<std::_Rb_tree_node<Party const*> >&, unsigned long) (alloc_traits.h:436)
+==7204==    by 0x1452EC: std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_M_get_node() (stl_tree.h:588)
+==7204==    by 0x144FC9: std::_Rb_tree_node<Party const*>* std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_M_create_node<Party const* const&>(Party const* const&) (stl_tree.h:642)
+==7204==    by 0x144C94: std::_Rb_tree_node<Party const*>* std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_Alloc_node::operator()<Party const* const&>(Party const* const&) const (stl_tree.h:556)
+==7204==    by 0x14443D: std::_Rb_tree_iterator<Party const*> std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_M_insert_<Party const* const&, std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_Alloc_node>(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, Party const* const&, std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_Alloc_node&) (stl_tree.h:1753)
+==7204==    by 0x1435F6: std::pair<std::_Rb_tree_iterator<Party const*>, bool> std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_M_insert_unique<Party const* const&>(Party const* const&) (stl_tree.h:2096)
+==7204==    by 0x142A77: std::set<Party const*, std::less<Party const*>, std::allocator<Party const*> >::insert(Party const* const&) (stl_set.h:501)
+==7204==    by 0x141E30: Coalition::offerParty(Party const*) (Coalition.cpp:99)
+==7204==    by 0x1180E0: Agent::step(Simulation&) (Agent.cpp:104)
+==7204==    by 0x13D62C: Simulation::step() (Simulation.cpp:50)
+==7204== 
+==7204== 352 (192 direct, 160 indirect) bytes in 2 blocks are definitely lost in loss record 7 of 7
+==7204==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7204==    by 0x13D051: Simulation::Simulation(Graph, std::vector<Agent, std::allocator<Agent> >) (Simulation.cpp:10)
+==7204==    by 0x11A827: Parser::parseSimulation(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&) (Parser.cpp:101)
+==7204==    by 0x119CD2: Parser::readSimulation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Parser.cpp:9)
+==7204==    by 0x10C80C: main (main.cpp:19)
+==7204== 
+==7204== LEAK SUMMARY:
+==7204==    definitely lost: 240 bytes in 8 blocks
+==7204==    indirectly lost: 160 bytes in 5 blocks
+==7204==      possibly lost: 0 bytes in 0 blocks
+==7204==    still reachable: 0 bytes in 0 blocks
+==7204==         suppressed: 0 bytes in 0 blocks
+==7204== 
+==7204== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
+==7204== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
