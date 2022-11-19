@@ -16,7 +16,6 @@ int main(int argc, char **argv)
 
     // read simulation from config file
     const string config_path = argv[1];
-
     Simulation simulation = Parser::readSimulation(argv[1]);
 
     // run simulation and store json state after each iteration
@@ -36,7 +35,7 @@ int main(int argc, char **argv)
             break;
         }
     }
-    std::cout << "----------------Simulation Ended!" << std::endl; /// to remove
+    std::cout << "----------------Simulation Ended!" << std::endl;
     // writing the outputs list to a file
     const string output_path = config_path.substr(0, config_path.find_last_of('.')) + ".out";
     std::ofstream outputFile(output_path);

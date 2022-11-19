@@ -1,0 +1,203 @@
+==3911== Memcheck, a memory error detector
+==3911== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3911== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==3911== Command: bin/cRace tests/01.json
+==3911== Parent PID: 1817
+==3911== 
+--3911-- 
+--3911-- Valgrind options:
+--3911--    --leak-check=full
+--3911--    --show-leak-kinds=all
+--3911--    --track-origins=yes
+--3911--    --verbose
+--3911--    --log-file=valgrind-out.txt
+--3911-- Contents of /proc/version:
+--3911--   Linux version 4.15.0-197-generic (buildd@lcy02-amd64-110) (gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04)) #208-Ubuntu SMP Tue Nov 1 17:23:37 UTC 2022
+--3911-- 
+--3911-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3
+--3911-- Page sizes: currently 4096, max supported 4096
+--3911-- Valgrind library directory: /usr/lib/valgrind
+--3911-- Reading syms from /home/spl211/Desktop/SPL-Assignment1/bin/cRace
+--3911-- Reading syms from /lib/x86_64-linux-gnu/ld-2.27.so
+--3911--   Considering /lib/x86_64-linux-gnu/ld-2.27.so ..
+--3911--   .. CRC mismatch (computed 385b96e8 wanted 9d917e0b)
+--3911--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.27.so ..
+--3911--   .. CRC is valid
+--3911-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--3911--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--3911--   .. CRC mismatch (computed 62965bbf wanted eeb84137)
+--3911--    object doesn't have a symbol table
+--3911--    object doesn't have a dynamic symbol table
+--3911-- Scheduler: using generic scheduler lock implementation.
+--3911-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==3911== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-3911-by-spl211-on-???
+==3911== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-3911-by-spl211-on-???
+==3911== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-3911-by-spl211-on-???
+==3911== 
+==3911== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==3911== don't want to do, unless you know exactly what you're doing,
+==3911== or are doing some strange experiment):
+==3911==   /usr/lib/valgrind/../../bin/vgdb --pid=3911 ...command...
+==3911== 
+==3911== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==3911==   /path/to/gdb bin/cRace
+==3911== and then give GDB the following command
+==3911==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=3911
+==3911== --pid is optional if only one valgrind process is running
+==3911== 
+--3911-- REDIR: 0x4020d20 (ld-linux-x86-64.so.2:strlen) redirected to 0x58060901 (???)
+--3911-- REDIR: 0x4020b00 (ld-linux-x86-64.so.2:index) redirected to 0x5806091b (???)
+--3911-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--3911--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--3911--   .. CRC mismatch (computed 13d5e98a wanted 1786ecf1)
+--3911--    object doesn't have a symbol table
+--3911-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--3911--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--3911--   .. CRC mismatch (computed 8f77ef36 wanted fcbde737)
+--3911--    object doesn't have a symbol table
+==3911== WARNING: new redirection conflicts with existing -- ignoring it
+--3911--     old: 0x04020d20 (strlen              ) R-> (0000.0) 0x58060901 ???
+--3911--     new: 0x04020d20 (strlen              ) R-> (2007.0) 0x04c34db0 strlen
+--3911-- REDIR: 0x401d540 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c35ee0 (strcmp)
+--3911-- REDIR: 0x4021260 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c394f0 (mempcpy)
+--3911-- Reading syms from /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25
+--3911--    object doesn't have a symbol table
+--3911-- Reading syms from /lib/x86_64-linux-gnu/libgcc_s.so.1
+--3911--    object doesn't have a symbol table
+--3911-- Reading syms from /lib/x86_64-linux-gnu/libc-2.27.so
+--3911--   Considering /lib/x86_64-linux-gnu/libc-2.27.so ..
+--3911--   .. CRC mismatch (computed 8c0be908 wanted 7c906570)
+--3911--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.27.so ..
+--3911--   .. CRC is valid
+--3911-- Reading syms from /lib/x86_64-linux-gnu/libm-2.27.so
+--3911--   Considering /lib/x86_64-linux-gnu/libm-2.27.so ..
+--3911--   .. CRC mismatch (computed 0fef35ac wanted 26ea9025)
+--3911--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libm-2.27.so ..
+--3911--   .. CRC is valid
+--3911-- REDIR: 0x547da50 (libc.so.6:memmove) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547cd60 (libc.so.6:strncpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547dd30 (libc.so.6:strcasecmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547c7b0 (libc.so.6:strcat) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547cd90 (libc.so.6:rindex) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547f480 (libc.so.6:rawmemchr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547dbc0 (libc.so.6:mempcpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547d9f0 (libc.so.6:bcmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547cd20 (libc.so.6:strncmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547c820 (libc.so.6:strcmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547db20 (libc.so.6:memset) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x549adb0 (libc.so.6:wcschr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547ccc0 (libc.so.6:strnlen) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547c890 (libc.so.6:strcspn) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547dd80 (libc.so.6:strncasecmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547c860 (libc.so.6:strcpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547dec0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547cdc0 (libc.so.6:strpbrk) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547c7e0 (libc.so.6:index) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547cc90 (libc.so.6:strlen) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x5487380 (libc.so.6:memrchr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547ddd0 (libc.so.6:strcasecmp_l) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547d9c0 (libc.so.6:memchr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x549bb70 (libc.so.6:wcslen) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547d070 (libc.so.6:strspn) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547dd00 (libc.so.6:stpncpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547dcd0 (libc.so.6:stpcpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547f4b0 (libc.so.6:strchrnul) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x547de20 (libc.so.6:strncasecmp_l) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--3911-- REDIR: 0x548fff0 (libc.so.6:__strrchr_sse2) redirected to 0x4c34790 (__strrchr_sse2)
+--3911-- REDIR: 0x5476020 (libc.so.6:malloc) redirected to 0x4c31aa0 (malloc)
+--3911-- REDIR: 0x54902e0 (libc.so.6:__strlen_sse2) redirected to 0x4c34d30 (__strlen_sse2)
+--3911-- REDIR: 0x556ee80 (libc.so.6:__memcmp_sse4_1) redirected to 0x4c37d50 (__memcmp_sse4_1)
+--3911-- REDIR: 0x5488b30 (libc.so.6:__strcmp_sse2_unaligned) redirected to 0x4c35da0 (strcmp)
+--3911-- REDIR: 0x549a120 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4c36060 (memcpy@GLIBC_2.2.5)
+--3911-- REDIR: 0x547d5a0 (libc.so.6:__GI_strstr) redirected to 0x4c39760 (__strstr_sse2)
+--3911-- REDIR: 0x4ed1330 (libstdc++.so.6:operator new[](unsigned long)) redirected to 0x4c32830 (operator new[](unsigned long))
+--3911-- REDIR: 0x4ed1280 (libstdc++.so.6:operator new(unsigned long)) redirected to 0x4c32110 (operator new(unsigned long))
+--3911-- REDIR: 0x4ecf390 (libstdc++.so.6:operator delete(void*)) redirected to 0x4c331d0 (operator delete(void*))
+--3911-- REDIR: 0x549a100 (libc.so.6:__mempcpy_sse2_unaligned) redirected to 0x4c39130 (mempcpy)
+--3911-- REDIR: 0x4ecf3c0 (libstdc++.so.6:operator delete[](void*)) redirected to 0x4c336d0 (operator delete[](void*))
+--3911-- REDIR: 0x5476910 (libc.so.6:free) redirected to 0x4c32cd0 (free)
+--3911-- REDIR: 0x549a530 (libc.so.6:__memset_sse2_unaligned) redirected to 0x4c385d0 (memset)
+==3911== 
+==3911== HEAP SUMMARY:
+==3911==     in use at exit: 400 bytes in 13 blocks
+==3911==   total heap usage: 2,662 allocs, 2,649 frees, 256,409 bytes allocated
+==3911== 
+==3911== Searching for pointers to 13 not-freed blocks
+==3911== Checked 110,968 bytes
+==3911== 
+==3911== 8 bytes in 1 blocks are indirectly lost in loss record 1 of 7
+==3911==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3911==    by 0x1191C9: __gnu_cxx::new_allocator<Party const*>::allocate(unsigned long, void const*) (new_allocator.h:111)
+==3911==    by 0x11906D: std::allocator_traits<std::allocator<Party const*> >::allocate(std::allocator<Party const*>&, unsigned long) (alloc_traits.h:436)
+==3911==    by 0x118E3B: std::_Vector_base<Party const*, std::allocator<Party const*> >::_M_allocate(unsigned long) (stl_vector.h:172)
+==3911==    by 0x11872F: void std::vector<Party const*, std::allocator<Party const*> >::_M_realloc_insert<Party const* const&>(__gnu_cxx::__normal_iterator<Party const**, std::vector<Party const*, std::allocator<Party const*> > >, Party const* const&) (vector.tcc:406)
+==3911==    by 0x1183B9: std::vector<Party const*, std::allocator<Party const*> >::push_back(Party const* const&) (stl_vector.h:948)
+==3911==    by 0x141B19: Coalition::addParty(Party const*) (Coalition.cpp:97)
+==3911==    by 0x13D085: Simulation::Simulation(Graph, std::vector<Agent, std::allocator<Agent> >) (Simulation.cpp:13)
+==3911==    by 0x11A803: Parser::parseSimulation(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&) (Parser.cpp:101)
+==3911==    by 0x119CAE: Parser::readSimulation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Parser.cpp:9)
+==3911==    by 0x10C80C: main (main.cpp:19)
+==3911== 
+==3911== 16 bytes in 2 blocks are definitely lost in loss record 2 of 7
+==3911==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3911==    by 0x119E16: Parser::parseAgent(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&, int) (Parser.cpp:19)
+==3911==    by 0x11A50A: Parser::parseSimulation(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&) (Parser.cpp:80)
+==3911==    by 0x119CAE: Parser::readSimulation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Parser.cpp:9)
+==3911==    by 0x10C80C: main (main.cpp:19)
+==3911== 
+==3911== 16 bytes in 2 blocks are definitely lost in loss record 3 of 7
+==3911==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3911==    by 0x119F65: Parser::parseParty(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&, int) (Parser.cpp:33)
+==3911==    by 0x11A5C7: Parser::parseSimulation(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&) (Parser.cpp:85)
+==3911==    by 0x119CAE: Parser::readSimulation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Parser.cpp:9)
+==3911==    by 0x10C80C: main (main.cpp:19)
+==3911== 
+==3911== 16 bytes in 2 blocks are definitely lost in loss record 4 of 7
+==3911==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3911==    by 0x119F9A: Parser::parseParty(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&, int) (Parser.cpp:37)
+==3911==    by 0x11A5C7: Parser::parseSimulation(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&) (Parser.cpp:85)
+==3911==    by 0x119CAE: Parser::readSimulation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Parser.cpp:9)
+==3911==    by 0x10C80C: main (main.cpp:19)
+==3911== 
+==3911== 32 bytes in 1 blocks are indirectly lost in loss record 5 of 7
+==3911==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3911==    by 0x1191C9: __gnu_cxx::new_allocator<Party const*>::allocate(unsigned long, void const*) (new_allocator.h:111)
+==3911==    by 0x11906D: std::allocator_traits<std::allocator<Party const*> >::allocate(std::allocator<Party const*>&, unsigned long) (alloc_traits.h:436)
+==3911==    by 0x118E3B: std::_Vector_base<Party const*, std::allocator<Party const*> >::_M_allocate(unsigned long) (stl_vector.h:172)
+==3911==    by 0x11872F: void std::vector<Party const*, std::allocator<Party const*> >::_M_realloc_insert<Party const* const&>(__gnu_cxx::__normal_iterator<Party const**, std::vector<Party const*, std::allocator<Party const*> > >, Party const* const&) (vector.tcc:406)
+==3911==    by 0x1183B9: std::vector<Party const*, std::allocator<Party const*> >::push_back(Party const* const&) (stl_vector.h:948)
+==3911==    by 0x141B19: Coalition::addParty(Party const*) (Coalition.cpp:97)
+==3911==    by 0x13B08C: Party::step(Simulation&) (Party.cpp:112)
+==3911==    by 0x13D58E: Simulation::step() (Simulation.cpp:44)
+==3911==    by 0x10C957: main (main.cpp:28)
+==3911== 
+==3911== 120 bytes in 3 blocks are indirectly lost in loss record 6 of 7
+==3911==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3911==    by 0x1448A3: __gnu_cxx::new_allocator<std::_Rb_tree_node<Party const*> >::allocate(unsigned long, void const*) (new_allocator.h:111)
+==3911==    by 0x144810: std::allocator_traits<std::allocator<std::_Rb_tree_node<Party const*> > >::allocate(std::allocator<std::_Rb_tree_node<Party const*> >&, unsigned long) (alloc_traits.h:436)
+==3911==    by 0x14479E: std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_M_get_node() (stl_tree.h:588)
+==3911==    by 0x1444F5: std::_Rb_tree_node<Party const*>* std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_M_create_node<Party const* const&>(Party const* const&) (stl_tree.h:642)
+==3911==    by 0x1442BC: std::_Rb_tree_node<Party const*>* std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_Alloc_node::operator()<Party const* const&>(Party const* const&) const (stl_tree.h:556)
+==3911==    by 0x143C8D: std::_Rb_tree_iterator<Party const*> std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_M_insert_<Party const* const&, std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_Alloc_node>(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, Party const* const&, std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_Alloc_node&) (stl_tree.h:1753)
+==3911==    by 0x14315C: std::pair<std::_Rb_tree_iterator<Party const*>, bool> std::_Rb_tree<Party const*, Party const*, std::_Identity<Party const*>, std::less<Party const*>, std::allocator<Party const*> >::_M_insert_unique<Party const* const&>(Party const* const&) (stl_tree.h:2096)
+==3911==    by 0x14278D: std::set<Party const*, std::less<Party const*>, std::allocator<Party const*> >::insert(Party const* const&) (stl_set.h:501)
+==3911==    by 0x141C0C: Coalition::offerParty(Party const*) (Coalition.cpp:107)
+==3911==    by 0x1180B4: Agent::step(Simulation&) (Agent.cpp:101)
+==3911==    by 0x13D602: Simulation::step() (Simulation.cpp:50)
+==3911== 
+==3911== 352 (192 direct, 160 indirect) bytes in 2 blocks are definitely lost in loss record 7 of 7
+==3911==    at 0x4C3217F: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3911==    by 0x13D00F: Simulation::Simulation(Graph, std::vector<Agent, std::allocator<Agent> >) (Simulation.cpp:10)
+==3911==    by 0x11A803: Parser::parseSimulation(nlohmann::basic_json<std::map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::adl_serializer> const&) (Parser.cpp:101)
+==3911==    by 0x119CAE: Parser::readSimulation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Parser.cpp:9)
+==3911==    by 0x10C80C: main (main.cpp:19)
+==3911== 
+==3911== LEAK SUMMARY:
+==3911==    definitely lost: 240 bytes in 8 blocks
+==3911==    indirectly lost: 160 bytes in 5 blocks
+==3911==      possibly lost: 0 bytes in 0 blocks
+==3911==    still reachable: 0 bytes in 0 blocks
+==3911==         suppressed: 0 bytes in 0 blocks
+==3911== 
+==3911== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
+==3911== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)

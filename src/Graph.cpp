@@ -1,5 +1,5 @@
 #include "Graph.h"
-
+#include <iostream>
 #include <utility>
 
 Graph::Graph(vector<Party> vertices, vector<vector<int>> edges) : mVertices(std::move(vertices)), mEdges(std::move(edges))

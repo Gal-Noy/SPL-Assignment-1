@@ -27,5 +27,5 @@ public:
 private:
     Graph mGraph;
     vector<Agent> mAgents;
-    map<Party *, int> mParties;
+    map<int, int> mParties;
 };

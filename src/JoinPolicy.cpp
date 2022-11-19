@@ -3,7 +3,7 @@
 
 int MandatesJoinPolicy::choose(vector<Coalition *> &offers) {
     int maxMandates = 0;
-    for (int i = 1; i < offers.size(); i++) {
+    for (unsigned int i = 1; i < offers.size(); i++) {
         if (offers[i]->getMandates() > offers[maxMandates]->getMandates()) {
             maxMandates = i;
         }

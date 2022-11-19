@@ -10,67 +10,73 @@ Party::Party(int id, string name, int mandates, JoinPolicy *jp) :
         mJoinPolicy(jp),
         mState(Waiting),
         offers(vector<Coalition *>{}) {
+
 }
 
-//Party::~Party() { // destructor
-//    if (mJoinPolicy) delete mJoinPolicy;
+Party::~Party() { // destructor
 //    for (Coalition * coalition : offers){
 //        delete coalition;
 //    }
-//}
-//
-//Party::Party(const Party &other) { // copy constructor
-//    mId = other.mId;
-//    mName = other.mName;
-//    mMandates = other.mMandates;
-//    cooldown = other.cooldown;
-//    mState = other.mState;
-//    mJoinPolicy = other.mJoinPolicy;
-//    offers = *new vector<Coalition *>(other.offers);
-//}
-//
-//Party::Party(Party &&other) { // move constructor
-//    mId = other.mId;
-//    mName = other.mName;
-//    mMandates = other.mMandates;
-//    cooldown = other.cooldown;
-//    mState = other.mState;
-//    mJoinPolicy = other.mJoinPolicy;
-//    other.mJoinPolicy = nullptr;
+    offers.clear();
+}
+
+Party::Party(const Party &other) { // copy constructor
+    mId = other.mId;
+    mName = other.mName;
+    mMandates = other.mMandates;
+    mState = other.mState;
+    mJoinPolicy = other.mJoinPolicy;
+
+    offers = vector<Coalition *>(other.offers);
+}
+
+Party::Party(Party &&other) { // move constructor
+    mId = other.mId;
+    mName = other.mName;
+    mMandates = other.mMandates;
+    mState = other.mState;
+
+    mJoinPolicy = other.mJoinPolicy;
+    other.mJoinPolicy = nullptr;
+
+    offers = std::move(other.offers);
+//    for (Coalition * coalition : offers){
+//        delete coalition;
+//    }
+}
+
+Party &Party::operator=(const Party &other) { // copy assignment operator
+    if (this != &other) {
+        mId = other.mId;
+        mName = other.mName;
+        mMandates = other.mMandates;
+        mState = other.mState;
+
+        *mJoinPolicy = *other.mJoinPolicy;
+
+        offers = other.offers;
+    }
+    return *this;
+}
+
+Party &Party::operator=(Party &&other) { // move assignment operator
+    mId = other.mId;
+    mName = other.mName;
+    mMandates = other.mMandates;
+    mState = other.mState;
+
+    if (mJoinPolicy) delete mJoinPolicy;
+    mJoinPolicy = other.mJoinPolicy;
+    other.mJoinPolicy = nullptr;
+
+    offers =std::move(other.offers);
+
+//    for (Coalition * coalition : offers){
+//        delete coalition;
+//    }
 //    offers = other.offers;
-//    for (Coalition * coalition : offers){
-//        delete coalition;
-//    }
-//}
-//
-//Party &Party::operator=(const Party &other) { // copy assignment operator
-//    if (this != &other) {
-//        mId = other.mId;
-//        mName = other.mName;
-//        mMandates = other.mMandates;
-//        cooldown = other.cooldown;
-//        mState = other.mState;
-//        *mJoinPolicy = *other.mJoinPolicy;
-//        offers = other.offers;
-//    }
-//    return *this;
-//}
-//
-//Party &Party::operator=(Party &&other) { // move assignment operator
-//    mId = other.mId;
-//    mName = other.mName;
-//    mMandates = other.mMandates;
-//    cooldown = other.cooldown;
-//    mState = other.mState;
-//    if (mJoinPolicy) delete mJoinPolicy;
-//    mJoinPolicy = other.mJoinPolicy;
-//    other.mJoinPolicy = nullptr;
-//    for (Coalition * coalition : offers){
-//        delete coalition;
-//    }
-//    offers = other.offers;
-//    return *this;
-//}
+    return *this;
+}
 
 State Party::getState() const {
     return mState;

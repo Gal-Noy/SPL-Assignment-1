@@ -3,7 +3,7 @@
 #include <utility>
 
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(graph)), mAgents(std::move(agents)),
-                                                            mParties(map<Party *, int>{}) {
+                                                            mParties(map<int, int>{}) {
     mAgents.reserve(mGraph.getNumVertices());
 
     for (Agent &agent: mAgents) {
@@ -13,9 +13,8 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(gra
         agentCoalition->addParty(party);
     }
     vector<Party> &parties = mGraph.getParties();
-    for (Party &party: parties) {
-        mParties[&party] = -1;
-    }
+    for (int i = 0; i < parties.size(); i++)
+        mParties[i] = -1;
 
     for (Agent &agent: mAgents) {
         std::cout << "agent is " << &agent << std::endl;
@@ -30,18 +29,19 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(gra
 void Simulation::step() {
 
     // 1. parties-step: parties that can answer offers, answer
-    for (auto &mParty: mParties) {
-        Party *party = mParty.first;
+    vector<Party> &parties = mGraph.getParties();
+    for (int i = 0; i < parties.size(); i++){
+        Party *party = &parties[i];
         if (party->getState() == CollectingOffers) {
-            std::cout << "party " << party->getId() << " cd is " << mParties[party] << std::endl;
-            if (mParties[party] != 0) {
-                if (mParties[party] == -1)
-                    mParties[party] = 1;
+            std::cout << "party " << party->getId() << " cd is " << mParties[i] << std::endl;
+            if (mParties[i] != 0) {
+                if (mParties[i] == -1)
+                    mParties[i] = 1;
                 else
-                    mParties[party]--;
-                std::cout << "party " << party->getId() << " timer set to " << mParties[party] << std::endl;
+                    mParties[i]--;
+                std::cout << "party " << party->getId() << " timer set to " << mParties[i] << std::endl;
             } else
-                mParty.first->step(*this);
+                party->step(*this);
         }
     }
 
@@ -59,7 +59,9 @@ bool Simulation::shouldTerminate() const {
     for (const vector<int> &coalition: politicalMap) {
         for (int partyId: coalition)
             mandates += getParty(partyId).getMandates();
-        if (mandates > 60) return true;
+        if (mandates > 60) {
+            return true;
+        }
         mandates = 0;
     }
 
@@ -68,7 +70,6 @@ bool Simulation::shouldTerminate() const {
         const Party &party = getParty(i);
         if (party.getState() != Joined) return false;
     }
-
     return true;
 }
 

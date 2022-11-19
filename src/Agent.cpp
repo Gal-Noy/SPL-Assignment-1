@@ -6,23 +6,23 @@ Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgen
                                                                            mSelectionPolicy(selectionPolicy) {
 }
 
-Agent::~Agent() { // destructor
-    if (mCoalition) delete mCoalition;
-    if (mSelectionPolicy) delete mSelectionPolicy;
-}
+Agent::~Agent() {} // destructor
 
 Agent::Agent(const Agent &other) { // copy constructor
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId;
-    mCoalition = new Coalition(*(other.mCoalition));
+
+    mCoalition = other.mCoalition;
     mSelectionPolicy = other.mSelectionPolicy;
 }
 
 Agent::Agent(Agent &&other) { // move constructor
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId;
+
     mCoalition = other.mCoalition;
     other.mCoalition = nullptr;
+
     mSelectionPolicy = other.mSelectionPolicy;
     other.mSelectionPolicy = nullptr;
 }
@@ -31,6 +31,7 @@ Agent &Agent::operator=(const Agent &other) { // copy assignment operator
     if (this != &other) {
         mAgentId = other.mAgentId;
         mPartyId = other.mPartyId;
+
         *mCoalition = *other.mCoalition;
         *mSelectionPolicy = *other.mSelectionPolicy;
     }
@@ -40,12 +41,15 @@ Agent &Agent::operator=(const Agent &other) { // copy assignment operator
 Agent &Agent::operator=(Agent &&other) { // move assignment operator
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId;
+
     if (mCoalition) delete mCoalition;
     mCoalition = other.mCoalition;
     other.mCoalition = nullptr;
+
     if (mSelectionPolicy) delete mSelectionPolicy;
     mSelectionPolicy = other.mSelectionPolicy;
     other.mSelectionPolicy = nullptr;
+
     return *this;
 }
 
@@ -73,7 +77,6 @@ void Agent::step(Simulation &sim) {
     std::cout << "started step agent " << mAgentId << std::endl;
     vector<const Party *> availableParties;
     const Graph &graph = sim.getGraph();
-//    const Party &agentParty = graph.getParty(mPartyId);
     Coalition *agentCoalition = getCoalition();
 
 //    /// Debug
@@ -85,7 +88,6 @@ void Agent::step(Simulation &sim) {
     for (int i = 0; i < graph.getNumVertices(); i++) {
         if (i != mPartyId) {
             const Party *party = &graph.getParty(i);
-            const vector<Coalition *> &offers = party->getOffers();
             const set<const Party *> &offeredParties = agentCoalition->getOfferedParties();
             if (graph.getEdgeWeight(mPartyId, i) != 0 && party->getState() != Joined &&
                 offeredParties.find(party) == offeredParties.end()) {
