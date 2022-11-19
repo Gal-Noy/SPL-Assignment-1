@@ -22,9 +22,10 @@ public:
     const vector<Agent> &getAgents() const;
     const Party &getParty(int partyId) const;
     const vector<vector<int>> getPartiesByCoalitions() const;
-    void cloneAgent(const Agent &, int partyId);
+    void cloneAgent(Agent *, int partyId);
 
 private:
     Graph mGraph;
     vector<Agent> mAgents;
+    map<Party *, int> mParties;
 };

@@ -1,15 +1,16 @@
 #include "JoinPolicy.h"
+#include "Coalition.h"
 
-Coalition *MandatesJoinPolicy::choose(vector<Coalition *> &offers) {
-    Coalition *maxMandates = offers[0];
+int MandatesJoinPolicy::choose(vector<Coalition *> &offers) {
+    int maxMandates = 0;
     for (int i = 1; i < offers.size(); i++) {
-        if (offers[i] > maxMandates) {
-            maxMandates = offers[i];
+        if (offers[i]->getMandates() > offers[maxMandates]->getMandates()) {
+            maxMandates = i;
         }
     }
     return maxMandates;
 }
 
-Coalition *LastOfferJoinPolicy::choose(vector<Coalition *> &offers) {
-    return offers[offers.size() - 1];
+int LastOfferJoinPolicy::choose(vector<Coalition *> &offers) {
+    return (int) offers.size() - 1;
 }

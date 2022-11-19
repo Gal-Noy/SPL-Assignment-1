@@ -34,8 +34,7 @@ public:
     const string &getName() const;
 
     int getId() const;
-    void changeCooldown();
-    void addOffer(Coalition &coalition);
+    void addOffer(Coalition *coalition);
     const vector<Coalition*> &getOffers() const;
 
 private:
@@ -44,6 +43,5 @@ private:
     int mMandates;
     JoinPolicy *mJoinPolicy;
     State mState;
-    int cooldown;
     vector<Coalition*> offers;
 };

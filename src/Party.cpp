@@ -1,7 +1,7 @@
-#include "Party.h"
-
-#include <utility>
 #include "Simulation.h"
+#include "Party.h"
+#include <iostream>
+#include <utility>
 
 Party::Party(int id, string name, int mandates, JoinPolicy *jp) :
         mId(id),
@@ -9,7 +9,6 @@ Party::Party(int id, string name, int mandates, JoinPolicy *jp) :
         mMandates(mandates),
         mJoinPolicy(jp),
         mState(Waiting),
-        cooldown(-1),
         offers(vector<Coalition *>{}) {
 }
 
@@ -93,30 +92,26 @@ int Party::getId() const {
     return mId;
 }
 
-void Party::changeCooldown() {
-    if (cooldown < 0)
-        cooldown = 2;
-    else if (cooldown > 0)
-        cooldown--;
-}
-
 void Party::step(Simulation &s) {
-    if (getState() != CollectingOffers)
-        return;
+    std::cout << "started step party " << mId << " with offers amount of " << offers.size() << std::endl;
 
-    if (cooldown > 0) {
-        changeCooldown();
-        return;
+    /// Debug
+    std::cout << "party's offers are:" << std::endl;
+    for (Coalition * col : offers){
+        std::cout << col->getAgent()->getId() << std::endl;
     }
-    Coalition *toJoin = mJoinPolicy->choose(offers);
-    toJoin->addParty(this);
-    s.cloneAgent(toJoin->getAgent(), mId);
 
+    Coalition *toJoin = offers[mJoinPolicy->choose(offers)];
+    std::cout << "party " << mId << " chose coalition " << toJoin->getAgent()->getId() << std::endl;
+    toJoin->addParty(this);
+    s.cloneAgent(const_cast<Agent *>(toJoin->getAgent()), mId);
     setState(Joined);
+
+    std::cout << "ended step party " << mId << std::endl;
 }
 
-void Party::addOffer(Coalition &coalition) {
-    offers.push_back(&coalition);
+void Party::addOffer(Coalition *coalition) {
+    offers.push_back(coalition);
 }
 
 const vector<Coalition *> &Party::getOffers() const {
