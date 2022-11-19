@@ -102,13 +102,13 @@ void Party::step(Simulation &s) {
     /// Debug
     std::cout << "party's offers are:" << std::endl;
     for (Coalition * col : offers){
-        std::cout << col->getAgent().getId() << std::endl;
+        std::cout << col->getAgentId() << std::endl;
     }
 
     Coalition *toJoin = offers[mJoinPolicy->choose(offers)];
-    std::cout << "party " << mId << " chose coalition " << toJoin->getAgent().getId() << std::endl;
+    std::cout << "party " << mId << " chose coalition " << toJoin->getAgentId() << std::endl;
     toJoin->addParty(*this);
-    s.cloneAgent(toJoin->getAgent(), mId);
+    s.cloneAgent(toJoin->getAgentId(), mId);
     setState(Joined);
 
     std::cout << "ended step party " << mId << std::endl;

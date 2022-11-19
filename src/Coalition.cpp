@@ -5,8 +5,8 @@
 #include "Party.h"
 #include "Agent.h"
 
-Coalition::Coalition(Agent *agent, vector<Party *> _existingParties) :
-        mAgent(agent),
+Coalition::Coalition(int agentId, vector<Party *> _existingParties) :
+        mAgentId(agentId),
         existingParties(std::move(_existingParties)),
         offeredParties(set<const Party*>{}), //
         mandates(0)
@@ -32,16 +32,14 @@ Coalition::~Coalition() { // destructor
 
 Coalition::Coalition(const Coalition &other){ // copy constructor
     mandates = other.mandates;
-    mAgent = new Agent(*other.mAgent);
+    mAgentId = other.mAgentId;
     existingParties = vector<Party *>(other.existingParties);
     offeredParties = set<const Party *>(other.offeredParties);
 }
 
 Coalition::Coalition(Coalition &&other){ // move constructor
     mandates = other.mandates;
-
-    mAgent = other.mAgent;
-    other.mAgent = nullptr;
+    mAgentId = other.mAgentId;
 
     existingParties = std::move(other.existingParties);
 //    for (const Party * party : existingParties){
@@ -56,8 +54,7 @@ Coalition::Coalition(Coalition &&other){ // move constructor
 Coalition &Coalition::operator=(const Coalition &other) { // copy assignment operator
     if (this != &other){
         mandates = other.mandates;
-
-        *mAgent = *other.mAgent;
+        mAgentId = other.mAgentId;
 
         existingParties = other.existingParties;
         offeredParties = other.offeredParties;
@@ -67,10 +64,7 @@ Coalition &Coalition::operator=(const Coalition &other) { // copy assignment ope
 
 Coalition &Coalition::operator=(Coalition &&other){ // move assignment operator
     mandates = other.mandates;
-
-    if (mAgent) delete mAgent;
-    mAgent = other.mAgent;
-    other.mAgent = nullptr;
+    mAgentId = other.mAgentId;
 
     existingParties = std::move(other.existingParties);
     offeredParties = std::move(other.offeredParties);
@@ -87,8 +81,8 @@ Coalition &Coalition::operator=(Coalition &&other){ // move assignment operator
     return *this;
 }
 
-Agent &Coalition::getAgent(){
-    return *mAgent;
+int Coalition::getAgentId() const{
+    return mAgentId;
 }
 
 int Coalition::getMandates() const {
@@ -98,7 +92,7 @@ int Coalition::getMandates() const {
 void Coalition::addParty(Party &party) {
     existingParties.push_back(&party);
     mandates += party.getMandates();
-    std::cout << "coalition " << getAgent().getId() << " added party " << party.getId() << " and its mandates amount is " << mandates << std::endl;
+    std::cout << "coalition " << mAgentId << " added party " << party.getId() << " and its mandates amount is " << mandates << std::endl;
 }
 
 void Coalition::offerParty(const Party *party){

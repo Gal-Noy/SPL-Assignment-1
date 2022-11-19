@@ -105,7 +105,7 @@ void Agent::step(Simulation &sim) {
         selectedParty->addOffer(agentCoalition);
         if (selectedParty->getState() == Waiting)
             selectedParty->setState(CollectingOffers);
-        std::cout << "agent " << mAgentId << " of coalition " << getCoalition()->getAgent().getId() << " offered party " << selectedParty->getId() << std::endl;
+        std::cout << "agent " << mAgentId << " of coalition " << getCoalition()->getAgentId() << " offered party " << selectedParty->getId() << std::endl;
     }
 
     std::cout << "ended step agent " << mAgentId << std::endl;
