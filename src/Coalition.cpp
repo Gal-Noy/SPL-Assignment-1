@@ -5,23 +5,22 @@
 #include "Party.h"
 #include "Agent.h"
 
-Coalition::Coalition(int agentId, vector<int> _existingParties) : mAgentId(agentId),
-                                                                  existingParties(std::move(_existingParties)),
-                                                                  offeredParties(vector<int>{}), mandates(0) {}
-
-Coalition::~Coalition() {} // destructor
+Coalition::Coalition(int agentId) : mAgentId(agentId), existingParties(vector<int>{}),
+                                    offeredParties(vector<int>{}), mandates(0) {}
 
 Coalition::Coalition(const Coalition &other) : mAgentId(other.mAgentId),
                                                existingParties(vector<int>(other.existingParties)),
-                                               offeredParties(vector<int>(other.offeredParties)), mandates(other.mandates){} // copy constructor
+                                               offeredParties(vector<int>(other.offeredParties)),
+                                               mandates(other.mandates) {} // copy constructor
 
 
-Coalition::Coalition(Coalition &&other) noexcept : mAgentId(other.mAgentId),
-                                          existingParties(std::move(other.existingParties)),
-                                          offeredParties(std::move(other.offeredParties)), mandates(other.mandates){} // move constructor
+Coalition::Coalition(Coalition &&other) noexcept: mAgentId(other.mAgentId),
+                                                  existingParties(std::move(other.existingParties)),
+                                                  offeredParties(std::move(other.offeredParties)),
+                                                  mandates(other.mandates) {} // move constructor
 
 Coalition &Coalition::operator=(const Coalition &other) { // copy assignment operator
-    if (this != &other){
+    if (this != &other) {
         mandates = other.mandates;
         mAgentId = other.mAgentId;
         existingParties = vector<int>(other.existingParties);

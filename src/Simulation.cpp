@@ -4,49 +4,58 @@
 
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(graph)), mAgents(std::move(agents)),
                                                             mCoalitions(vector<Coalition>{}), mParties(map<unsigned int, int>{})  {
+    // Reserve enough memory for maximum amount of agents
     mAgents.reserve(mGraph.getNumVertices());
 
-    for (int i = 0; i < (int) mAgents.size(); i++){
+    // Initialize coalition for each agent
+    for (unsigned int i = 0; i < mAgents.size(); i++){
         Agent &agent = mAgents[i];
-        agent.setCoalition(i);
-        Coalition agentCoalition(agent.getId(), vector<int>{});
+        agent.setCoalition((int) i);
+        Coalition agentCoalition(agent.getId());
+
+        // Add agent's party to its coalition
         Party &party = mGraph.getPartyById(agent.getPartyId());
         agentCoalition.addParty(party);
+
         mCoalitions.push_back(agentCoalition);
     }
 
+    // Initialize timers for each party (set to -1)
     vector<Party> &parties = mGraph.getParties();
     for (int i = 0; i < (int) parties.size(); i++) {
         mParties[i] = -1;
     }
 
+    /////////////// DEBUG ///////////////
     for (Agent &agent: mAgents) {
         std::cout << "coalition of agent number " << agent.getId() << " with party number "
                   << agent.getPartyId() << " with "
                   << mCoalitions[agent.getCoalitionId()].getMandates() << " mandates" << std::endl; // to remove
     }
+    /////////////// DEBUG ///////////////
 }
 
 void Simulation::step() {
 
-    // 1. parties-step: parties that can answer offers, answer
+    // Parties step: iterate each party and invoke "step"
     vector<Party> &parties = mGraph.getParties();
     for (unsigned int i = 0; i < parties.size(); i++) {
-        Party *party = &parties[i];
-        if (party->getState() == CollectingOffers) {
-            std::cout << "party " << party->getId() << " timer is " << mParties[i] << std::endl;
+        Party &party = parties[i];
+        if (party.getState() == CollectingOffers) {
+            std::cout << "party " << party.getId() << " timer is " << mParties[i] << std::endl;
             if (mParties[i] != 0) {
                 if (mParties[i] == -1)
                     mParties[i] = 1;
                 else
                     mParties[i]--;
-                std::cout << "party " << party->getId() << " timer set to " << mParties[i] << std::endl;
-            } else
-                party->step(*this);
+                std::cout << "party " << party.getId() << " timer set to " << mParties[i] << std::endl;
+            }
+            else
+                party.step(*this);
         }
     }
 
-    // 2. agents-step: select party to offer and offer
+    // Agents step: iterate each agent and invoke "step"
     for (Agent &agent: mAgents) {
         agent.step(*this);
     }
@@ -54,25 +63,24 @@ void Simulation::step() {
 
 bool Simulation::shouldTerminate() const {
 
-    // check coalitions and return true if mandates >= 61
+    // Check coalitions and return true if mandates >= 61
     vector<vector<int>> politicalMap = getPartiesByCoalitions();
     int mandates = 0;
-    for (const vector<int> &coalition: politicalMap) {
-        for (int partyId: coalition)
+    int totalMandates = 0;
+    for (vector<int> &coalition: politicalMap) {
+        for (int partyId: coalition) {
             mandates += getParty(partyId).getMandates();
-        if (mandates > 60) {
-            return true;
+            if (mandates > 60)
+                return true;
         }
+        totalMandates += mandates;
         mandates = 0;
     }
 
-    // check parties and check if there's a party without a coalition (state waiting/collecting offers)
-    for (int i = 0; i < getGraph().getNumVertices(); i++) {
-        const Party &party = getParty(i);
-        if (party.getState() != Joined) return false;
-    }
+    // If we summed 120 mandates from the coalitions, then every party is "Joined"
+    if (totalMandates == 120) return true;
 
-    return true;
+    return false;
 }
 
 Coalition &Simulation::getCoalition(int coalitionId){

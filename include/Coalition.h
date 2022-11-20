@@ -11,8 +11,8 @@ using std::vector;
 
 class Coalition {
 public:
-    Coalition(int agentId, vector<int> existingParties);
-    virtual ~Coalition(); // destructor
+    Coalition(int agentId);
+    virtual ~Coalition() = default;// destructor
     Coalition(const Coalition &other); // copy constructor
     Coalition(Coalition &&other) noexcept ; // move constructor
     Coalition &operator=(const Coalition &other); // copy assignment operator
