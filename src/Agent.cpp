@@ -8,24 +8,18 @@ Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgen
 }
 
 Agent::~Agent() { // destructor
-//    if (mCoalition) delete mCoalition;
-    std::cout << "AGENT DESTRUCTOR ACTIVATED" << std::endl;
+    if (mSelectionPolicy) delete mSelectionPolicy;
+//    std::cout << "AGENT DESTRUCTOR ACTIVATED" << std::endl;
 }
 
-Agent::Agent(const Agent &other) { // copy constructor
-    mAgentId = other.mAgentId;
-    mPartyId = other.mPartyId;
-    mCoalitionId = other.mCoalitionId;
-    mSelectionPolicy = other.mSelectionPolicy;
-//    mSelectionPolicy = new SelectionPolicy(*other.mSelectionPolicy);
+Agent::Agent(const Agent &other) : mAgentId(other.mAgentId), mPartyId(other.mPartyId),
+                                   mCoalitionId(other.mCoalitionId),
+                                   mSelectionPolicy(other.mSelectionPolicy->clone()){ // copy constructor
 }
 
-Agent::Agent(Agent &&other) { // move constructor
-    mAgentId = other.mAgentId;
-    mPartyId = other.mPartyId;
-    mCoalitionId = other.mCoalitionId;
-
-    mSelectionPolicy = other.mSelectionPolicy;
+Agent::Agent(Agent &&other) : mAgentId(other.mAgentId), mPartyId(other.mPartyId),
+                              mCoalitionId(other.mCoalitionId),
+                              mSelectionPolicy(other.mSelectionPolicy->clone()){ // move constructor
     other.mSelectionPolicy = nullptr;
 }
 

@@ -2,6 +2,10 @@
 #include "Coalition.h"
 #include "Simulation.h"
 
+MandatesJoinPolicy* MandatesJoinPolicy:: clone() const {
+    return new MandatesJoinPolicy(*this);
+}
+
 int MandatesJoinPolicy::choose(vector<int> &offers, Simulation &s) {
     Coalition &coalition = s.getCoalition(offers[0]);
     int index = 0;
@@ -12,6 +16,10 @@ int MandatesJoinPolicy::choose(vector<int> &offers, Simulation &s) {
         }
     }
     return index;
+}
+
+LastOfferJoinPolicy* LastOfferJoinPolicy:: clone() const {
+    return new LastOfferJoinPolicy(*this);
 }
 
 int LastOfferJoinPolicy::choose(vector<int> &offers, Simulation &s) {

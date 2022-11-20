@@ -3,48 +3,31 @@
 #include <iostream>
 #include <utility>
 
-Party::Party(int id, string name, int mandates, JoinPolicy *jp) :
-        mId(id),
-        mName(std::move(name)),
-        mMandates(mandates),
-        mJoinPolicy(jp),
-        mState(Waiting),
-        offers(vector<int>{}) {
+Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(std::move(name)), mMandates(mandates),
+                                                                  mJoinPolicy(jp), mState(Waiting),
+                                                                  offers(vector<int>{}) {
 
 }
 
 Party::~Party() { // destructor
-//    for (Coalition * coalition : offers){
-//        delete coalition;
-//    }
-//    offers.clear();
+    if (mJoinPolicy) delete mJoinPolicy;
     std::cout << "PARTY DESTRUCTOR ACTIVATED" << std::endl;
 }
 
-Party::Party(const Party &other) { // copy constructor
-    mId = other.mId;
-    mName = other.mName;
-    mMandates = other.mMandates;
-    mState = other.mState;
-    mJoinPolicy = other.mJoinPolicy;
+Party::Party(const Party &other) : mId(other.mId), mName(other.mName), mMandates(other.mMandates),
+                                   mJoinPolicy(other.mJoinPolicy->clone()), mState(other.mState),
+                                   offers(vector<int>(other.offers)) {}// copy constructor
 
-    offers = vector<int>(other.offers);
-}
-
-Party::Party(Party &&other) { // move constructor
-    mId = other.mId;
-    mName = other.mName;
-    mMandates = other.mMandates;
-    mState = other.mState;
-
-    mJoinPolicy = other.mJoinPolicy;
+Party::Party(Party &&other) : mId(other.mId), mName(other.mName), mMandates(other.mMandates),
+                              mJoinPolicy(other.mJoinPolicy->clone()), mState(other.mState),
+                              offers(std::move(other.offers)) { // move constructor
     other.mJoinPolicy = nullptr;
-
-    offers = std::move(other.offers);
 }
 
 Party &Party::operator=(const Party &other) { // copy assignment operator
+
     if (this != &other) {
+
         mId = other.mId;
         mName = other.mName;
         mMandates = other.mMandates;
@@ -52,12 +35,13 @@ Party &Party::operator=(const Party &other) { // copy assignment operator
 
         *mJoinPolicy = *other.mJoinPolicy;
 
-        offers = other.offers;
+        offers = vector<int>(other.offers);
     }
     return *this;
 }
 
 Party &Party::operator=(Party &&other) { // move assignment operator
+
     mId = other.mId;
     mName = other.mName;
     mMandates = other.mMandates;
@@ -67,12 +51,8 @@ Party &Party::operator=(Party &&other) { // move assignment operator
     mJoinPolicy = other.mJoinPolicy;
     other.mJoinPolicy = nullptr;
 
-    offers =std::move(other.offers);
+    offers = std::move(other.offers);
 
-//    for (Coalition * coalition : offers){
-//        delete coalition;
-//    }
-//    offers = other.offers;
     return *this;
 }
 
@@ -101,7 +81,7 @@ void Party::step(Simulation &s) {
 
     /// Debug
     std::cout << "party's offers are:" << std::endl;
-    for (int col : offers){
+    for (int col: offers) {
         std::cout << col << std::endl;
     }
     int coalitionToJoinId = offers[mJoinPolicy->choose(offers, s)];

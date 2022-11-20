@@ -30,5 +30,5 @@ private:
     Graph mGraph;
     vector<Agent> mAgents;
     vector<Coalition> mCoalitions;
-    map<int, int> mParties;
+    map<unsigned int, int> mParties;
 };
