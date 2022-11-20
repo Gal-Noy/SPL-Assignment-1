@@ -19,7 +19,7 @@ Party::Party(const Party &other) : mId(other.mId), mName(other.mName), mMandates
                                    mJoinPolicy(other.mJoinPolicy->clone()), mState(other.mState),
                                    offers(vector<int>(other.offers)) {}// copy constructor
 
-Party::Party(Party &&other) noexcept : mId(other.mId), mName(other.mName), mMandates(other.mMandates),
+Party::Party(Party &&other) noexcept : mId(other.mId), mName(std::move(other.mName)), mMandates(other.mMandates),
                               mJoinPolicy(other.mJoinPolicy->clone()), mState(other.mState),
                               offers(std::move(other.offers)) { // move constructor
     other.mJoinPolicy = nullptr;
@@ -44,7 +44,7 @@ Party &Party::operator=(const Party &other) { // copy assignment operator
 Party &Party::operator=(Party &&other) noexcept { // move assignment operator
 
     mId = other.mId;
-    mName = other.mName;
+    mName = std::move(other.mName);
     mMandates = other.mMandates;
     mState = other.mState;
 

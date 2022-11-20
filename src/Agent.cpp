@@ -71,11 +71,6 @@ void Agent::step(Simulation &sim) {
     Graph &graph = sim.getGraph();
     Coalition &agentCoalition = sim.getCoalition(mCoalitionId);
 
-//    /// Debug
-//    std::cout << "agent id " << mAgentId << std::endl;
-//    std::cout << "party id " << mPartyId << std::endl;
-//    std::cout << "col id " << agentCoalition.getAgent().mAgentId << std::endl;
-
     // get availableParties
     for (int i = 0; i < graph.getNumVertices(); i++) {
         if (i != mPartyId) {
