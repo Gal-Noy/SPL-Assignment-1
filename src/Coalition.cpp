@@ -15,17 +15,16 @@ Coalition::Coalition(int agentId, vector<Party *> _existingParties) :
 }
 
 Coalition::~Coalition() { // destructor
-//    if (mAgent) delete mAgent;
 
-    for (Party * party : existingParties){
-        delete party;
-    }
-    existingParties.clear();
-
-    for (const Party * party : offeredParties){
-        delete party;
-    }
-    offeredParties.clear();
+//    for (Party * party : existingParties){
+//        delete party;
+//    }
+//    existingParties.clear();
+//
+//    for (const Party * party : offeredParties){
+//        delete party;
+//    }
+//    offeredParties.clear();
 
     std::cout << "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC" << std::endl;
 }
@@ -42,32 +41,32 @@ Coalition::Coalition(Coalition &&other){ // move constructor
     mAgentId = other.mAgentId;
 
     existingParties = std::move(other.existingParties);
-//    for (const Party * party : existingParties){
-//        delete party;
-//    }
+////    for (const Party * party : existingParties){
+////        delete party;
+////    }
     offeredParties = std::move(other.offeredParties);
-//    for (const Party * party : offeredParties){
-//        delete party;
-//    }
+////    for (const Party * party : offeredParties){
+////        delete party;
+////    }
 }
 
-Coalition &Coalition::operator=(const Coalition &other) { // copy assignment operator
-    if (this != &other){
-        mandates = other.mandates;
-        mAgentId = other.mAgentId;
-
-        existingParties = other.existingParties;
-        offeredParties = other.offeredParties;
-    }
-    return *this;
-}
-
-Coalition &Coalition::operator=(Coalition &&other){ // move assignment operator
-    mandates = other.mandates;
-    mAgentId = other.mAgentId;
-
-    existingParties = std::move(other.existingParties);
-    offeredParties = std::move(other.offeredParties);
+//Coalition &Coalition::operator=(const Coalition &other) { // copy assignment operator
+//    if (this != &other){
+//        mandates = other.mandates;
+//        mAgentId = other.mAgentId;
+//
+//        existingParties = other.existingParties;
+//        offeredParties = other.offeredParties;
+//    }
+//    return *this;
+//}
+//
+//Coalition &Coalition::operator=(Coalition &&other){ // move assignment operator
+//    mandates = other.mandates;
+//    mAgentId = other.mAgentId;
+//
+//    existingParties = std::move(other.existingParties);
+//    offeredParties = std::move(other.offeredParties);
 
 //    for (const Party * party : existingParties){
 //        delete party;
@@ -78,8 +77,8 @@ Coalition &Coalition::operator=(Coalition &&other){ // move assignment operator
 //    }
 //    offeredParties = other.offeredParties;
 
-    return *this;
-}
+//    return *this;
+//}
 
 int Coalition::getAgentId() const{
     return mAgentId;

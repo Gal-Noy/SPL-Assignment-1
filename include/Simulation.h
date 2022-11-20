@@ -20,6 +20,7 @@ public:
 
     const Graph &getGraph() const;
     const vector<Agent> &getAgents() const;
+    const Coalition &getCoalition(int coalitionId) const;
     const Party &getParty(int partyId) const;
     const vector<vector<int>> getPartiesByCoalitions() const;
     void cloneAgent(int agentId, int partyId);
@@ -27,5 +28,6 @@ public:
 private:
     Graph mGraph;
     vector<Agent> mAgents;
+    vector<Coalition> mCoalitions;
     map<int, int> mParties;
 };

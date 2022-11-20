@@ -16,9 +16,9 @@ public:
 
     int getId() const;
 
-    Coalition *getCoalition() const;
+    int getCoalitionId() const;
 
-    void setCoalition(Coalition *);
+    void setCoalition(int coalitionId);
 
     int getPartyId() const;
 
@@ -29,6 +29,6 @@ public:
 private:
     int mAgentId;
     int mPartyId;
-    Coalition *mCoalition;
+    int mCoalitionId;
     SelectionPolicy *mSelectionPolicy;
 };
