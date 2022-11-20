@@ -34,7 +34,7 @@ void Simulation::step() {
     for (int i = 0; i < parties.size(); i++) {
         Party *party = &parties[i];
         if (party->getState() == CollectingOffers) {
-            std::cout << "party " << party->getId() << " cd is " << mParties[i] << std::endl;
+            std::cout << "party " << party->getId() << " timer is " << mParties[i] << std::endl;
             if (mParties[i] != 0) {
                 if (mParties[i] == -1)
                     mParties[i] = 1;
@@ -71,6 +71,7 @@ bool Simulation::shouldTerminate() const {
         const Party &party = getParty(i);
         if (party.getState() != Joined) return false;
     }
+
     return true;
 }
 

@@ -8,7 +8,6 @@ int MandatesSelectionPolicy::select(vector<Party *> &availableParties, int party
     return output;
 }
 
-
 int EdgeWeightSelectionPolicy::select(vector<Party *> &availableParties, int partyId, const Graph &graph) {
     int output = 0;
     int maxEdgeWeight = -1;

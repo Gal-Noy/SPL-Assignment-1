@@ -16,8 +16,8 @@ Agent::Agent(const Agent &other) { // copy constructor
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId;
     mCoalitionId = other.mCoalitionId;
-//    mCoalition = new Coalition(*other.mCoalition);
     mSelectionPolicy = other.mSelectionPolicy;
+//    mSelectionPolicy = new SelectionPolicy(*other.mSelectionPolicy);
 }
 
 Agent::Agent(Agent &&other) { // move constructor
