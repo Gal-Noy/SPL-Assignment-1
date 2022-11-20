@@ -10,27 +10,21 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(gra
         Agent &agent = mAgents[i];
         agent.setCoalition(i);
         Coalition agentCoalition(agent.getId(), vector<Party *>{});
-        auto &party = const_cast<Party &>(getParty(agent.getPartyId()));
+        Party &party = mGraph.getPartyById(agent.getPartyId());
         agentCoalition.addParty(party);
         mCoalitions.push_back(agentCoalition);
     }
-//    for (Agent &agent: mAgents) {
-//        Coalition *agentCoalition = new Coalition(agent.getId(), vector<Party *>{});
-//        agent.setCoalition(agentCoalition);
-//        auto &party = const_cast<Party &>(getParty(agent.getPartyId()));
-//        agentCoalition->addParty(party);
-//        mCoalitions.push_back(*agentCoalition);
-//    }
+
     vector<Party> &parties = mGraph.getParties();
     for (int i = 0; i < (int) parties.size(); i++) {
         mParties[i] = -1;
     }
 
-//    for (Agent &agent: mAgents) {
-//        std::cout << "coalition of agent number " << agent.getId() << " with party number "
-//                  << agent.getPartyId() << " with "
-//                  << mCoalitions[agent.getCoalitionId()].getMandates() << " mandates" << std::endl; // to remove
-//    }
+    for (Agent &agent: mAgents) {
+        std::cout << "coalition of agent number " << agent.getId() << " with party number "
+                  << agent.getPartyId() << " with "
+                  << mCoalitions[agent.getCoalitionId()].getMandates() << " mandates" << std::endl; // to remove
+    }
 }
 
 void Simulation::step() {
@@ -80,11 +74,15 @@ bool Simulation::shouldTerminate() const {
     return true;
 }
 
-const Coalition &Simulation::getCoalition(int coalitionId) const{
+Coalition &Simulation::getCoalition(int coalitionId){
     return mCoalitions[coalitionId];
 }
 
 const Graph &Simulation::getGraph() const {
+    return mGraph;
+}
+
+Graph &Simulation::getGraph(){
     return mGraph;
 }
 

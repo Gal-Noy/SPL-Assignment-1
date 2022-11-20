@@ -17,6 +17,8 @@ public:
 
     const Party &getParty(int partyId) const;
 
+    Party &getPartyById(int partyId);
+
     vector<Party> &getParties();
 
 private:

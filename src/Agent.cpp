@@ -72,9 +72,9 @@ SelectionPolicy *Agent::getSelectionPolicy() const {
 
 void Agent::step(Simulation &sim) {
     std::cout << "started step agent " << mAgentId << std::endl;
-    vector<const Party *> availableParties;
-    const Graph &graph = sim.getGraph();
-    Coalition &agentCoalition = const_cast<Coalition &>(sim.getCoalition(mCoalitionId));
+    vector<Party *> availableParties;
+    Graph &graph = sim.getGraph();
+    Coalition &agentCoalition = sim.getCoalition(mCoalitionId);
 
 //    /// Debug
 //    std::cout << "agent id " << mAgentId << std::endl;
@@ -84,7 +84,7 @@ void Agent::step(Simulation &sim) {
     // get availableParties
     for (int i = 0; i < graph.getNumVertices(); i++) {
         if (i != mPartyId) {
-            const Party &party = graph.getParty(i);
+            Party &party = graph.getPartyById(i);
             const set<const Party *> &offeredParties = agentCoalition.getOfferedParties();
             if (graph.getEdgeWeight(mPartyId, i) != 0 && party.getState() != Joined &&
                 offeredParties.find(&party) == offeredParties.end()) {
@@ -94,7 +94,7 @@ void Agent::step(Simulation &sim) {
     }
     if (!availableParties.empty()) {
         int index = mSelectionPolicy->select(availableParties, mPartyId, graph);
-        auto *selectedParty = const_cast<Party *>(availableParties[index]);
+        Party *selectedParty = availableParties[index];
         agentCoalition.offerParty(selectedParty);
         selectedParty->addOffer(&agentCoalition);
         if (selectedParty->getState() == Waiting)
