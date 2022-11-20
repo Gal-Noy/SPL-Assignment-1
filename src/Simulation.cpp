@@ -9,7 +9,7 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(gra
     // Initialize coalition for each agent
     for (unsigned int i = 0; i < mAgents.size(); i++){
         Agent &agent = mAgents[i];
-        agent.setCoalition((int) i);
+        agent.setCoalition(i);
         Coalition agentCoalition(agent.getId());
 
         // Add agent's party to its coalition
@@ -21,7 +21,7 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(gra
 
     // Initialize timers for each party (set to -1)
     vector<Party> &parties = mGraph.getParties();
-    for (int i = 0; i < (int) parties.size(); i++) {
+    for (unsigned int i = 0; i < parties.size(); i++) {
         mParties[i] = -1;
     }
 }
@@ -103,7 +103,7 @@ const vector<vector<int>> Simulation::getPartiesByCoalitions() const {
 
 void Simulation::cloneAgent(int agentId, int partyId) {
     Agent &agentToClone = mAgents[agentId];
-    Agent toAdd((int) mAgents.size(), partyId, agentToClone.getSelectionPolicy()->clone());
+    Agent toAdd(mAgents.size(), partyId, agentToClone.getSelectionPolicy()->clone());
     toAdd.setCoalition(agentToClone.getCoalitionId());
     mAgents.push_back(toAdd);
 }

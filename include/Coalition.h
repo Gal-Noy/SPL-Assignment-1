@@ -11,7 +11,7 @@ using std::vector;
 
 class Coalition {
 public:
-    Coalition(int agentId);
+    explicit Coalition(int agentId);
 
     int getAgentId() const;
     int getMandates() const;

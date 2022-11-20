@@ -17,7 +17,7 @@ int Graph::getEdgeWeight(int v1, int v2) const
 
 int Graph::getNumVertices() const
 {
-    return (int) mVertices.size();
+    return mVertices.size();
 }
 
 const Party &Graph::getParty(int partyId) const

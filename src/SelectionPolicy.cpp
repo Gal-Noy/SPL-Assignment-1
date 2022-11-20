@@ -8,8 +8,8 @@ int MandatesSelectionPolicy::select(vector<Party *> &availableParties, int party
     unsigned int output = 0;
     for (unsigned int i = 1; i < availableParties.size(); i++)
         if (availableParties[i]->getMandates() > availableParties[output]->getMandates())
-            output = (int) i;
-    return (int) output;
+            output = i;
+    return output;
 }
 
 EdgeWeightSelectionPolicy* EdgeWeightSelectionPolicy:: clone() const {
@@ -22,9 +22,9 @@ int EdgeWeightSelectionPolicy::select(vector<Party *> &availableParties, int par
     for (unsigned int i = 0; i < availableParties.size(); i++){
         int currWeight = graph.getEdgeWeight(partyId, availableParties[i]->getId());
         if (currWeight > maxEdgeWeight) {
-            output = (int) i;
+            output = i;
             maxEdgeWeight = currWeight;
         }
     }
-    return (int) output;
+    return output;
 }
