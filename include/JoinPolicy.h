@@ -16,12 +16,14 @@ public:
 
 class MandatesJoinPolicy : public JoinPolicy {
 public:
-    virtual MandatesJoinPolicy* clone() const override;
+    MandatesJoinPolicy* clone() const override;
     int choose(vector<int> &, Simulation &) override;
+    ~MandatesJoinPolicy() override = default;
 };
 
 class LastOfferJoinPolicy : public JoinPolicy {
 public:
-    virtual LastOfferJoinPolicy* clone() const override;
+    LastOfferJoinPolicy* clone() const override;
     int choose(vector<int> &, Simulation &) override;
+    ~LastOfferJoinPolicy() override = default;
 };

@@ -11,6 +11,8 @@ Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName
 
 Party::~Party() { // destructor
     if (mJoinPolicy) delete mJoinPolicy;
+
+    // std:cout << "PARTY DESTRUCTOR ACTIVATED" << std::endl;
 }
 
 Party::Party(const Party &other) : mId(other.mId), mName(other.mName), mMandates(other.mMandates),

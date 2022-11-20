@@ -16,12 +16,14 @@ public:
 
 class MandatesSelectionPolicy : public SelectionPolicy {
 public:
-    virtual MandatesSelectionPolicy* clone() const override;
+    MandatesSelectionPolicy* clone() const override;
     int select(vector<Party *> &, int partyId, const Graph &graph) override;
+    ~MandatesSelectionPolicy() override = default;
 };
 
 class EdgeWeightSelectionPolicy : public SelectionPolicy {
 public:
-    virtual EdgeWeightSelectionPolicy* clone() const override;
+    EdgeWeightSelectionPolicy* clone() const override;
     int select(vector<Party *> &, int partyId, const Graph &graph) override;
+    ~EdgeWeightSelectionPolicy() override = default;
 };
