@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include "Agent.h"
 
 Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgentId(agentId), mPartyId(partyId),
@@ -8,7 +9,7 @@ Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgen
 
 Agent::~Agent() { // destructor
 //    if (mCoalition) delete mCoalition;
-    std::cout << "AAAAAAAAAAAAAAAAAAAAAAAAAA" << std::endl;
+    std::cout << "AGENT DESTRUCTOR ACTIVATED" << std::endl;
 }
 
 Agent::Agent(const Agent &other) { // copy constructor
@@ -85,9 +86,9 @@ void Agent::step(Simulation &sim) {
     for (int i = 0; i < graph.getNumVertices(); i++) {
         if (i != mPartyId) {
             Party &party = graph.getPartyById(i);
-            const set<const Party *> &offeredParties = agentCoalition.getOfferedParties();
+            const vector<int> &offeredParties = agentCoalition.getOfferedParties();
             if (graph.getEdgeWeight(mPartyId, i) != 0 && party.getState() != Joined &&
-                offeredParties.find(&party) == offeredParties.end()) {
+                find(offeredParties.begin(), offeredParties.end(), i) == offeredParties.end()) {
                 availableParties.push_back(&party);
             }
         }
@@ -95,10 +96,11 @@ void Agent::step(Simulation &sim) {
     if (!availableParties.empty()) {
         int index = mSelectionPolicy->select(availableParties, mPartyId, graph);
         Party *selectedParty = availableParties[index];
-        agentCoalition.offerParty(selectedParty);
-        selectedParty->addOffer(&agentCoalition);
+        agentCoalition.offerParty(selectedParty->getId());
+        selectedParty->addOffer(mCoalitionId);
         if (selectedParty->getState() == Waiting)
             selectedParty->setState(CollectingOffers);
+
         std::cout << "agent " << mAgentId << " of coalition " << sim.getCoalition(mCoalitionId).getAgentId() << " offered party " << selectedParty->getId() << std::endl;
     }
 

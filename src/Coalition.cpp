@@ -5,10 +5,10 @@
 #include "Party.h"
 #include "Agent.h"
 
-Coalition::Coalition(int agentId, vector<Party *> _existingParties) :
+Coalition::Coalition(int agentId, vector<int> _existingParties) :
         mAgentId(agentId),
         existingParties(std::move(_existingParties)),
-        offeredParties(set<const Party*>{}), //
+        offeredParties(vector<int>{}), //
         mandates(0)
 {
     // Implementation of constructor
@@ -26,14 +26,14 @@ Coalition::~Coalition() { // destructor
 //    }
 //    offeredParties.clear();
 
-    std::cout << "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC" << std::endl;
+    std::cout << "COALITION DESTRUCTOR ACTIVATED" << std::endl;
 }
 
 Coalition::Coalition(const Coalition &other){ // copy constructor
     mandates = other.mandates;
     mAgentId = other.mAgentId;
-    existingParties = vector<Party *>(other.existingParties);
-    offeredParties = set<const Party *>(other.offeredParties);
+    existingParties = vector<int>(other.existingParties);
+    offeredParties = vector<int>(other.offeredParties);
 }
 
 Coalition::Coalition(Coalition &&other){ // move constructor
@@ -89,14 +89,14 @@ int Coalition::getMandates() const {
 }
 
 void Coalition::addParty(Party &party) {
-    existingParties.push_back(&party);
+    existingParties.push_back(party.getId());
     mandates += party.getMandates();
     std::cout << "coalition " << mAgentId << " added party " << party.getId() << " and its mandates amount is " << mandates << std::endl;
 }
 
-void Coalition::offerParty(const Party *party){
-    offeredParties.insert(party);
+void Coalition::offerParty(int partyId){
+    offeredParties.push_back(partyId);
 }
-const set<const Party*> &Coalition::getOfferedParties() const{
+const vector<int> &Coalition::getOfferedParties() const{
     return offeredParties;
 }

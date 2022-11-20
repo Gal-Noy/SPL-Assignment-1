@@ -9,7 +9,7 @@ Party::Party(int id, string name, int mandates, JoinPolicy *jp) :
         mMandates(mandates),
         mJoinPolicy(jp),
         mState(Waiting),
-        offers(vector<Coalition *>{}) {
+        offers(vector<int>{}) {
 
 }
 
@@ -18,7 +18,7 @@ Party::~Party() { // destructor
 //        delete coalition;
 //    }
 //    offers.clear();
-    std::cout << "PPPPPPPPPPPPPPPPPPPPPP" << std::endl;
+    std::cout << "PARTY DESTRUCTOR ACTIVATED" << std::endl;
 }
 
 Party::Party(const Party &other) { // copy constructor
@@ -28,7 +28,7 @@ Party::Party(const Party &other) { // copy constructor
     mState = other.mState;
     mJoinPolicy = other.mJoinPolicy;
 
-    offers = vector<Coalition *>(other.offers);
+    offers = vector<int>(other.offers);
 }
 
 Party::Party(Party &&other) { // move constructor
@@ -101,23 +101,23 @@ void Party::step(Simulation &s) {
 
     /// Debug
     std::cout << "party's offers are:" << std::endl;
-    for (Coalition * col : offers){
-        std::cout << col->getAgentId() << std::endl;
+    for (int col : offers){
+        std::cout << col << std::endl;
     }
-
-    Coalition *toJoin = offers[mJoinPolicy->choose(offers)];
-    std::cout << "party " << mId << " chose coalition " << toJoin->getAgentId() << std::endl;
-    toJoin->addParty(*this);
-    s.cloneAgent(toJoin->getAgentId(), mId);
+    int coalitionToJoinId = offers[mJoinPolicy->choose(offers, s)];
+    Coalition &toJoin = s.getCoalition(coalitionToJoinId);
+    std::cout << "party " << mId << " chose coalition " << toJoin.getAgentId() << std::endl;
+    toJoin.addParty(*this);
+    s.cloneAgent(toJoin.getAgentId(), mId);
     setState(Joined);
 
     std::cout << "ended step party " << mId << std::endl;
 }
 
-void Party::addOffer(Coalition *coalition) {
-    offers.push_back(coalition);
+void Party::addOffer(int coalitionId) {
+    offers.push_back(coalitionId);
 }
 
-const vector<Coalition *> &Party::getOffers() const {
+const vector<int> &Party::getOffers() const {
     return offers;
 }
