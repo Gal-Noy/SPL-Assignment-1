@@ -41,5 +41,7 @@ int main(int argc, char **argv)
     std::ofstream outputFile(output_path);
     outputFile << std::setw(4) << json(outPerIter) << endl;
 
+
+
     return 0;
 }

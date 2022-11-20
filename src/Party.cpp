@@ -11,14 +11,13 @@ Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName
 
 Party::~Party() { // destructor
     if (mJoinPolicy) delete mJoinPolicy;
-    std::cout << "PARTY DESTRUCTOR ACTIVATED" << std::endl;
 }
 
 Party::Party(const Party &other) : mId(other.mId), mName(other.mName), mMandates(other.mMandates),
                                    mJoinPolicy(other.mJoinPolicy->clone()), mState(other.mState),
                                    offers(vector<int>(other.offers)) {}// copy constructor
 
-Party::Party(Party &&other) : mId(other.mId), mName(other.mName), mMandates(other.mMandates),
+Party::Party(Party &&other) noexcept : mId(other.mId), mName(other.mName), mMandates(other.mMandates),
                               mJoinPolicy(other.mJoinPolicy->clone()), mState(other.mState),
                               offers(std::move(other.offers)) { // move constructor
     other.mJoinPolicy = nullptr;
@@ -40,7 +39,7 @@ Party &Party::operator=(const Party &other) { // copy assignment operator
     return *this;
 }
 
-Party &Party::operator=(Party &&other) { // move assignment operator
+Party &Party::operator=(Party &&other) noexcept { // move assignment operator
 
     mId = other.mId;
     mName = other.mName;
@@ -96,8 +95,4 @@ void Party::step(Simulation &s) {
 
 void Party::addOffer(int coalitionId) {
     offers.push_back(coalitionId);
-}
-
-const vector<int> &Party::getOffers() const {
-    return offers;
 }

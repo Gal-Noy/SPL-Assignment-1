@@ -16,7 +16,7 @@ Coalition::Coalition(const Coalition &other) : mAgentId(other.mAgentId),
                                                offeredParties(vector<int>(other.offeredParties)), mandates(other.mandates){} // copy constructor
 
 
-Coalition::Coalition(Coalition &&other) : mAgentId(other.mAgentId),
+Coalition::Coalition(Coalition &&other) noexcept : mAgentId(other.mAgentId),
                                           existingParties(std::move(other.existingParties)),
                                           offeredParties(std::move(other.offeredParties)), mandates(other.mandates){} // move constructor
 
@@ -30,7 +30,7 @@ Coalition &Coalition::operator=(const Coalition &other) { // copy assignment ope
     return *this;
 }
 
-Coalition &Coalition::operator=(Coalition &&other){ // move assignment operator
+Coalition &Coalition::operator=(Coalition &&other) noexcept { // move assignment operator
     mandates = other.mandates;
     mAgentId = other.mAgentId;
     existingParties = std::move(other.existingParties);

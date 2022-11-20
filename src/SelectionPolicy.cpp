@@ -8,7 +8,7 @@ int MandatesSelectionPolicy::select(vector<Party *> &availableParties, int party
     unsigned int output = 0;
     for (unsigned int i = 1; i < availableParties.size(); i++)
         if (availableParties[i]->getMandates() > availableParties[output]->getMandates())
-            output = i;
+            output = (int) i;
     return (int) output;
 }
 
@@ -22,7 +22,7 @@ int EdgeWeightSelectionPolicy::select(vector<Party *> &availableParties, int par
     for (unsigned int i = 0; i < availableParties.size(); i++){
         int currWeight = graph.getEdgeWeight(partyId, availableParties[i]->getId());
         if (currWeight > maxEdgeWeight) {
-            output = i;
+            output = (int) i;
             maxEdgeWeight = currWeight;
         }
     }
