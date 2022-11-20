@@ -107,29 +107,11 @@ const Party &Simulation::getParty(int partyId) const {
 /// At the simulation initialization - the result will be [[agent0.partyId], [agent1.partyId], ...]
 const vector<vector<int>> Simulation::getPartiesByCoalitions() const {
 
-    // Create a table to map each party to its coalition
-    map<int, vector<int>> map;
-    for (const Agent &agent: mAgents) {
-        int coalitionId = agent.getCoalitionId();
-        if (map.find(coalitionId) == map.end())
-            map[coalitionId] = vector<int>();
-        map[coalitionId].push_back(agent.getPartyId());
-    }
-
-    // Create output vector by map keys and values
     vector<vector<int>> ans;
-    for (const auto &coalitionVector: map)
-        ans.push_back(coalitionVector.second);
-
-//    /// Debug:
-//    std::cout << "list of coalitions now:" << std::endl; // to remove
-//    for (int i = 0; i < ans.size(); i++){
-//        vector<int> col = ans[i];
-//        std::cout << "coalition number - " << i << std::endl; // to remove
-//        for (int j : col){
-//            std::cout << "party number - " << j << std::endl; // to remove
-//        }
-//    }
+    for (const Coalition &coalition : mCoalitions){
+        ans.push_back(coalition.getExistingParties());
+    }
+    
     return ans;
 }
 

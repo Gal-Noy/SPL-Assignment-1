@@ -4,25 +4,24 @@
 
 Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgentId(agentId), mPartyId(partyId),
                                                                            mCoalitionId(-1),
-                                                                           mSelectionPolicy(selectionPolicy) {
-}
-
-Agent::~Agent() { // destructor
+                                                                           mSelectionPolicy(selectionPolicy) {}
+// destructor
+Agent::~Agent() {
     if (mSelectionPolicy) delete mSelectionPolicy;
-//    std::cout << "AGENT DESTRUCTOR ACTIVATED" << std::endl;
 }
 
+// copy constructor
 Agent::Agent(const Agent &other) : mAgentId(other.mAgentId), mPartyId(other.mPartyId),
                                    mCoalitionId(other.mCoalitionId),
-                                   mSelectionPolicy(other.mSelectionPolicy->clone()){ // copy constructor
-}
+                                   mSelectionPolicy(other.mSelectionPolicy->clone()){}
 
+// move constructor
 Agent::Agent(Agent &&other) noexcept : mAgentId(other.mAgentId), mPartyId(other.mPartyId),
                               mCoalitionId(other.mCoalitionId),
-                              mSelectionPolicy(other.mSelectionPolicy->clone()){ // move constructor
-}
+                              mSelectionPolicy(other.mSelectionPolicy->clone()){}
 
-Agent &Agent::operator=(const Agent &other) { // copy assignment operator
+// copy assignment operator
+Agent &Agent::operator=(const Agent &other) {
     if (this != &other) {
         mAgentId = other.mAgentId;
         mPartyId = other.mPartyId;
@@ -32,7 +31,8 @@ Agent &Agent::operator=(const Agent &other) { // copy assignment operator
     return *this;
 }
 
-Agent &Agent::operator=(Agent &&other) noexcept { // move assignment operator
+// move assignment operator
+Agent &Agent::operator=(Agent &&other) noexcept {
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId;
     mCoalitionId = other.mCoalitionId;
@@ -65,12 +65,14 @@ SelectionPolicy *Agent::getSelectionPolicy() const {
 }
 
 void Agent::step(Simulation &sim) {
-    std::cout << "started step agent " << mAgentId << std::endl;
-    vector<Party *> availableParties;
+
     Graph &graph = sim.getGraph();
     Coalition &agentCoalition = sim.getCoalition(mCoalitionId);
 
-    // get availableParties
+    // Get available parties to select from
+    vector<Party *> availableParties;
+
+    // Find neighbors in state Waiting/CollectingOffers without active offer from agent's coalition
     for (int i = 0; i < graph.getNumVertices(); i++) {
         if (i != mPartyId) {
             Party &party = graph.getPartyById(i);
@@ -81,16 +83,18 @@ void Agent::step(Simulation &sim) {
             }
         }
     }
+
+    // Select party to offer from available parties
     if (!availableParties.empty()) {
-        int index = mSelectionPolicy->select(availableParties, mPartyId, graph);
-        Party *selectedParty = availableParties[index];
+        int partyToSelectId = mSelectionPolicy->select(availableParties, mPartyId, graph);
+        Party *selectedParty = availableParties[partyToSelectId];
+
+        // Offer party
         agentCoalition.offerParty(selectedParty->getId());
         selectedParty->addOffer(mCoalitionId);
+
+        // Change state (if the party is offered for the first time)
         if (selectedParty->getState() == Waiting)
             selectedParty->setState(CollectingOffers);
-
-        std::cout << "agent " << mAgentId << " of coalition " << sim.getCoalition(mCoalitionId).getAgentId() << " offered party " << selectedParty->getId() << std::endl;
     }
-
-    std::cout << "ended step agent " << mAgentId << std::endl;
 }

@@ -12,21 +12,13 @@ using std::vector;
 class Coalition {
 public:
     Coalition(int agentId);
-    virtual ~Coalition() = default;// destructor
-    Coalition(const Coalition &other); // copy constructor
-    Coalition(Coalition &&other) noexcept ; // move constructor
-    Coalition &operator=(const Coalition &other); // copy assignment operator
-    Coalition &operator=(Coalition &&other) noexcept ; // move assignment operator
 
     int getAgentId() const;
-
     int getMandates() const;
-
     void addParty(Party &);
-
-    void offerParty(int partyId);
-
+    void offerParty(int);
     const vector<int> &getOfferedParties() const;
+    const vector<int> &getExistingParties() const;
 
 private:
     int mAgentId;

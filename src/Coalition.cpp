@@ -1,41 +1,9 @@
-#include <utility>
 #include <vector>
-#include <iostream>
 #include "Coalition.h"
 #include "Party.h"
-#include "Agent.h"
 
 Coalition::Coalition(int agentId) : mAgentId(agentId), existingParties(vector<int>{}),
                                     offeredParties(vector<int>{}), mandates(0) {}
-
-Coalition::Coalition(const Coalition &other) : mAgentId(other.mAgentId),
-                                               existingParties(vector<int>(other.existingParties)),
-                                               offeredParties(vector<int>(other.offeredParties)),
-                                               mandates(other.mandates) {} // copy constructor
-
-
-Coalition::Coalition(Coalition &&other) noexcept: mAgentId(other.mAgentId),
-                                                  existingParties(std::move(other.existingParties)),
-                                                  offeredParties(std::move(other.offeredParties)),
-                                                  mandates(other.mandates) {} // move constructor
-
-Coalition &Coalition::operator=(const Coalition &other) { // copy assignment operator
-    if (this != &other) {
-        mandates = other.mandates;
-        mAgentId = other.mAgentId;
-        existingParties = vector<int>(other.existingParties);
-        offeredParties = vector<int>(other.offeredParties);
-    }
-    return *this;
-}
-
-Coalition &Coalition::operator=(Coalition &&other) noexcept { // move assignment operator
-    mandates = other.mandates;
-    mAgentId = other.mAgentId;
-    existingParties = std::move(other.existingParties);
-    offeredParties = std::move(other.offeredParties);
-    return *this;
-}
 
 int Coalition::getAgentId() const {
     return mAgentId;
@@ -48,8 +16,6 @@ int Coalition::getMandates() const {
 void Coalition::addParty(Party &party) {
     existingParties.push_back(party.getId());
     mandates += party.getMandates();
-    std::cout << "coalition " << mAgentId << " added party " << party.getId() << " and its mandates amount is "
-              << mandates << std::endl;
 }
 
 void Coalition::offerParty(int partyId) {
@@ -58,4 +24,8 @@ void Coalition::offerParty(int partyId) {
 
 const vector<int> &Coalition::getOfferedParties() const {
     return offeredParties;
+}
+
+const vector<int> &Coalition::getExistingParties() const {
+    return existingParties;
 }

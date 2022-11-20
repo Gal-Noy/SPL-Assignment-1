@@ -8,11 +8,12 @@
 class Agent {
 public:
     Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy);
+
     virtual ~Agent(); // destructor
-    Agent(const Agent &other); // copy constructor
-    Agent(Agent &&other) noexcept ; // move constructor
-    Agent &operator=(const Agent &other); // copy assignment operator
-    Agent &operator=(Agent &&other) noexcept ; // move assignment operator
+    Agent(const Agent &); // copy constructor
+    Agent(Agent &&) noexcept ; // move constructor
+    Agent &operator=(const Agent &); // copy assignment operator
+    Agent &operator=(Agent &&) noexcept ; // move assignment operator
 
     int getId() const;
 

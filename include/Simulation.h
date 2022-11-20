@@ -10,14 +10,12 @@ using std::string;
 using std::vector;
 using std::map;
 
-class Simulation
-{
+class Simulation {
 public:
     Simulation(Graph g, vector<Agent> agents);
 
     void step();
     bool shouldTerminate() const;
-
     const Graph &getGraph() const;
     Graph &getGraph();
     const vector<Agent> &getAgents() const;

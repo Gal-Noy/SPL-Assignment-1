@@ -1,6 +1,4 @@
 #include "Graph.h"
-#include <iostream>
-#include <utility>
 
 Graph::Graph(vector<Party> vertices, vector<vector<int>> edges) : mVertices(std::move(vertices)), mEdges(std::move(edges))
 {
@@ -27,7 +25,8 @@ const Party &Graph::getParty(int partyId) const
     return mVertices[partyId];
 }
 
-Party &Graph::getPartyById(int partyId){
+Party &Graph::getPartyById(int partyId)
+{
     return mVertices[partyId];
 }
 
