@@ -2,8 +2,7 @@
 #include <utility>
 
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(graph)), mAgents(std::move(agents)),
-                                                            mCoalitions(vector<Coalition>{}),
-                                                            mParties(map<unsigned int, int>{}), maxMandatesCoalition(0),
+                                                            mCoalitions(vector<Coalition>{}), maxMandatesCoalition(0),
                                                             joinedMandates(0) {
     // Reserve enough memory for maximum amount of agents
     mAgents.reserve(mGraph.getNumVertices());
@@ -18,16 +17,11 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(std::move(gra
         Party &party = mGraph.getPartyById(agent.getPartyId());
         agentCoalition.addParty(party);
 
+        // Update simulation fields
         joinedMandates += party.getMandates();
         maxMandatesCoalition = std::max(maxMandatesCoalition, agentCoalition.getMandates());
 
         mCoalitions.push_back(agentCoalition);
-    }
-
-    // Initialize timers for each party (set to -1)
-    vector<Party> &parties = mGraph.getParties();
-    for (unsigned int i = 0; i < parties.size(); i++) {
-        mParties[i] = -1;
     }
 }
 
@@ -38,12 +32,10 @@ void Simulation::step() {
     for (unsigned int i = 0; i < parties.size(); i++) {
         Party &party = parties[i];
         if (party.getState() == CollectingOffers) {
-            if (mParties[i] != 0) {
-                if (mParties[i] == -1)
-                    mParties[i] = 1;
-                else
-                    mParties[i]--;
-            } else
+            int partyTimer = party.getTimer();
+            if (partyTimer != 0)
+                party.setTimer(partyTimer == -1 ? 1 : partyTimer - 1);
+            else
                 party.step(*this);
         }
     }
@@ -86,11 +78,11 @@ void Simulation::cloneAgent(int agentId, int partyId) {
     mAgents.push_back(toAdd);
 }
 
-void Simulation::addJoinedMandates(int mandates){
+void Simulation::addJoinedMandates(int mandates) {
     joinedMandates += mandates;
 }
 
-void Simulation::setMaxMandates(int coalitionMandates){
+void Simulation::setMaxMandates(int coalitionMandates) {
     maxMandatesCoalition = max(maxMandatesCoalition, coalitionMandates);
 }
 

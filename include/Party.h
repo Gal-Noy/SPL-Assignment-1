@@ -34,11 +34,14 @@ public:
     const string &getName() const;
     int getId() const;
     void addOffer(int);
+    int getTimer() const;
+    void setTimer(int val);
 
 private:
     int mId;
     string mName;
     int mMandates;
+    int timer;
     JoinPolicy *mJoinPolicy;
     State mState;
     vector<int> offers;

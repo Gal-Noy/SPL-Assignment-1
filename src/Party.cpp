@@ -2,7 +2,7 @@
 #include "Party.h"
 
 Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(std::move(name)), mMandates(mandates),
-                                                                  mJoinPolicy(jp), mState(Waiting),
+                                                                  timer(-1), mJoinPolicy(jp), mState(Waiting),
                                                                   offers(vector<int>{}) {}
 // destructor
 Party::~Party() {
@@ -11,12 +11,12 @@ Party::~Party() {
 
 // copy constructor
 Party::Party(const Party &other) : mId(other.mId), mName(other.mName), mMandates(other.mMandates),
-                                   mJoinPolicy(other.mJoinPolicy->clone()), mState(other.mState),
+                                   timer(-1), mJoinPolicy(other.mJoinPolicy->clone()), mState(other.mState),
                                    offers(vector<int>(other.offers)) {}
 
 // move constructor
 Party::Party(Party &&other) noexcept : mId(other.mId), mName(std::move(other.mName)), mMandates(other.mMandates),
-                              mJoinPolicy(other.mJoinPolicy->clone()), mState(other.mState),
+                              timer(-1), mJoinPolicy(other.mJoinPolicy->clone()), mState(other.mState),
                               offers(std::move(other.offers)) {}
 
 // copy assignment operator
@@ -26,6 +26,7 @@ Party &Party::operator=(const Party &other) {
         mName = other.mName;
         mMandates = other.mMandates;
         mState = other.mState;
+        timer = other.timer;
         *mJoinPolicy = *other.mJoinPolicy;
         offers = vector<int>(other.offers);
     }
@@ -38,6 +39,7 @@ Party &Party::operator=(Party &&other) noexcept {
     mName = std::move(other.mName);
     mMandates = other.mMandates;
     mState = other.mState;
+    timer = other.timer;
     offers = std::move(other.offers);
 
     if (mJoinPolicy) delete mJoinPolicy;
@@ -69,6 +71,14 @@ int Party::getId() const {
 
 void Party::addOffer(int coalitionId) {
     offers.push_back(coalitionId);
+}
+
+int Party::getTimer() const{
+    return timer;
+}
+
+void Party::setTimer(int val){
+    timer = val;
 }
 
 void Party::step(Simulation &s) {

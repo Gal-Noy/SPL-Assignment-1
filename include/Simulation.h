@@ -32,8 +32,6 @@ private:
     Graph mGraph;
     vector<Agent> mAgents;
     vector<Coalition> mCoalitions;
-    map<unsigned int, int> mParties;
-
     int maxMandatesCoalition;
     int joinedMandates;
 };
