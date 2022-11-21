@@ -82,4 +82,8 @@ void Party::step(Simulation &s) {
     s.cloneAgent(toJoin.getAgentId(), mId);
 
     setState(Joined);
+
+    // Update simulation fields
+    s.addJoinedMandates(this->getMandates());
+    s.setMaxMandates(toJoin.getMandates());
 }

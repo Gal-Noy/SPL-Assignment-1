@@ -10,6 +10,8 @@ using std::string;
 using std::vector;
 using std::map;
 
+using namespace std;
+
 class Simulation {
 public:
     Simulation(Graph g, vector<Agent> agents);
@@ -23,10 +25,15 @@ public:
     const Party &getParty(int partyId) const;
     const vector<vector<int>> getPartiesByCoalitions() const;
     void cloneAgent(int agentId, int partyId);
+    void addJoinedMandates(int mandates);
+    void setMaxMandates(int coalitionMandates);
 
 private:
     Graph mGraph;
     vector<Agent> mAgents;
     vector<Coalition> mCoalitions;
     map<unsigned int, int> mParties;
+
+    int maxMandatesCoalition;
+    int joinedMandates;
 };
