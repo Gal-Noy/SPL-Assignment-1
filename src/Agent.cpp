@@ -18,7 +18,9 @@ Agent::Agent(const Agent &other) : mAgentId(other.mAgentId), mPartyId(other.mPar
 // move constructor
 Agent::Agent(Agent &&other) noexcept : mAgentId(other.mAgentId), mPartyId(other.mPartyId),
                               mCoalitionId(other.mCoalitionId),
-                              mSelectionPolicy(other.mSelectionPolicy->clone()){}
+                              mSelectionPolicy(other.mSelectionPolicy){
+    other.mSelectionPolicy = nullptr;
+}
 
 // copy assignment operator
 Agent &Agent::operator=(const Agent &other) {

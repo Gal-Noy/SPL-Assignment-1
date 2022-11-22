@@ -16,8 +16,10 @@ Party::Party(const Party &other) : mId(other.mId), mName(other.mName), mMandates
 
 // move constructor
 Party::Party(Party &&other) noexcept : mId(other.mId), mName(std::move(other.mName)), mMandates(other.mMandates),
-                              timer(-1), mJoinPolicy(other.mJoinPolicy->clone()), mState(other.mState),
-                              offers(std::move(other.offers)) {}
+                              timer(other.timer), mJoinPolicy(other.mJoinPolicy), mState(other.mState),
+                              offers(std::move(other.offers)) {
+    other.mJoinPolicy = nullptr;
+}
 
 // copy assignment operator
 Party &Party::operator=(const Party &other) {
